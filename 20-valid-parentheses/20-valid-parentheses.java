@@ -1,27 +1,33 @@
+import java.util.Stack;
 class Solution {
+    
+    
+    
     public boolean isValid(String s) {
-        Stack st = new Stack<Character>();
         
-        HashMap hm = new HashMap<Character, Character>();
-        hm.put('(', ')');
-        hm.put('{','}');
-        hm.put('[',']');
+        HashMap<Character, Character> bracketPair = new HashMap<Character, Character>();
+        bracketPair.put(')','(');
+        bracketPair.put('}','{');
+        bracketPair.put(']','[');
         
+        Stack<Character> st = new Stack<Character>();
+        char top ;
         for(char c : s.toCharArray()){
-            if(c == '(' || c == '{' || c == '['){
+            if(c=='(' || c=='{' || c=='[' ){
                 st.push(c);
-            }else if(! st.isEmpty()) {
-                char top = (char)st.peek();
-                if(c == (char)hm.get(top)){
-                    st.pop();
+            }else{
+                if(!st.isEmpty()){
+                    top = st.peek();
+                    if(top == bracketPair.get(c)){
+                        st.pop();
+                    }else{
+                       return false; 
+                    }
                 }else{
                     return false;
                 }
-            }else{
-                return false;
             }
         }
-        
         
         return st.size() == 0;
     }
