@@ -16,6 +16,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | ------- |
 | [0167-two-sum-ii-input-array-is-sorted](https://github.com/rohitkr7/LeetCode/tree/master/0167-two-sum-ii-input-array-is-sorted) |
 | [0287-find-the-duplicate-number](https://github.com/rohitkr7/LeetCode/tree/master/0287-find-the-duplicate-number) |
+| [0653-two-sum-iv-input-is-a-bst](https://github.com/rohitkr7/LeetCode/tree/master/0653-two-sum-iv-input-is-a-bst) |
 ## Binary Search
 |  |
 | ------- |
@@ -29,6 +30,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 |  |
 | ------- |
 | [0448-find-all-numbers-disappeared-in-an-array](https://github.com/rohitkr7/LeetCode/tree/master/0448-find-all-numbers-disappeared-in-an-array) |
+| [0653-two-sum-iv-input-is-a-bst](https://github.com/rohitkr7/LeetCode/tree/master/0653-two-sum-iv-input-is-a-bst) |
 | [1482-how-many-numbers-are-smaller-than-the-current-number](https://github.com/rohitkr7/LeetCode/tree/master/1482-how-many-numbers-are-smaller-than-the-current-number) |
 ## Sorting
 |  |
@@ -46,4 +48,24 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 |  |
 | ------- |
 | [0054-spiral-matrix](https://github.com/rohitkr7/LeetCode/tree/master/0054-spiral-matrix) |
+## Tree
+|  |
+| ------- |
+| [0653-two-sum-iv-input-is-a-bst](https://github.com/rohitkr7/LeetCode/tree/master/0653-two-sum-iv-input-is-a-bst) |
+## Depth-First Search
+|  |
+| ------- |
+| [0653-two-sum-iv-input-is-a-bst](https://github.com/rohitkr7/LeetCode/tree/master/0653-two-sum-iv-input-is-a-bst) |
+## Breadth-First Search
+|  |
+| ------- |
+| [0653-two-sum-iv-input-is-a-bst](https://github.com/rohitkr7/LeetCode/tree/master/0653-two-sum-iv-input-is-a-bst) |
+## Binary Search Tree
+|  |
+| ------- |
+| [0653-two-sum-iv-input-is-a-bst](https://github.com/rohitkr7/LeetCode/tree/master/0653-two-sum-iv-input-is-a-bst) |
+## Binary Tree
+|  |
+| ------- |
+| [0653-two-sum-iv-input-is-a-bst](https://github.com/rohitkr7/LeetCode/tree/master/0653-two-sum-iv-input-is-a-bst) |
 <!---LeetCode Topics End-->
