@@ -7,16 +7,19 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 |  |
 | ------- |
 | [0054-spiral-matrix](https://github.com/rohitkr7/LeetCode/tree/master/0054-spiral-matrix) |
+| [0167-two-sum-ii-input-array-is-sorted](https://github.com/rohitkr7/LeetCode/tree/master/0167-two-sum-ii-input-array-is-sorted) |
 | [0287-find-the-duplicate-number](https://github.com/rohitkr7/LeetCode/tree/master/0287-find-the-duplicate-number) |
 | [0448-find-all-numbers-disappeared-in-an-array](https://github.com/rohitkr7/LeetCode/tree/master/0448-find-all-numbers-disappeared-in-an-array) |
 | [1482-how-many-numbers-are-smaller-than-the-current-number](https://github.com/rohitkr7/LeetCode/tree/master/1482-how-many-numbers-are-smaller-than-the-current-number) |
 ## Two Pointers
 |  |
 | ------- |
+| [0167-two-sum-ii-input-array-is-sorted](https://github.com/rohitkr7/LeetCode/tree/master/0167-two-sum-ii-input-array-is-sorted) |
 | [0287-find-the-duplicate-number](https://github.com/rohitkr7/LeetCode/tree/master/0287-find-the-duplicate-number) |
 ## Binary Search
 |  |
 | ------- |
+| [0167-two-sum-ii-input-array-is-sorted](https://github.com/rohitkr7/LeetCode/tree/master/0167-two-sum-ii-input-array-is-sorted) |
 | [0287-find-the-duplicate-number](https://github.com/rohitkr7/LeetCode/tree/master/0287-find-the-duplicate-number) |
 ## Bit Manipulation
 |  |
