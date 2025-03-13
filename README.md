@@ -13,6 +13,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | [0303-range-sum-query-immutable](https://github.com/rohitkr7/LeetCode/tree/master/0303-range-sum-query-immutable) |
 | [0448-find-all-numbers-disappeared-in-an-array](https://github.com/rohitkr7/LeetCode/tree/master/0448-find-all-numbers-disappeared-in-an-array) |
 | [0525-contiguous-array](https://github.com/rohitkr7/LeetCode/tree/master/0525-contiguous-array) |
+| [0560-subarray-sum-equals-k](https://github.com/rohitkr7/LeetCode/tree/master/0560-subarray-sum-equals-k) |
 | [1482-how-many-numbers-are-smaller-than-the-current-number](https://github.com/rohitkr7/LeetCode/tree/master/1482-how-many-numbers-are-smaller-than-the-current-number) |
 ## Two Pointers
 |  |
@@ -37,6 +38,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | [0141-linked-list-cycle](https://github.com/rohitkr7/LeetCode/tree/master/0141-linked-list-cycle) |
 | [0448-find-all-numbers-disappeared-in-an-array](https://github.com/rohitkr7/LeetCode/tree/master/0448-find-all-numbers-disappeared-in-an-array) |
 | [0525-contiguous-array](https://github.com/rohitkr7/LeetCode/tree/master/0525-contiguous-array) |
+| [0560-subarray-sum-equals-k](https://github.com/rohitkr7/LeetCode/tree/master/0560-subarray-sum-equals-k) |
 | [0653-two-sum-iv-input-is-a-bst](https://github.com/rohitkr7/LeetCode/tree/master/0653-two-sum-iv-input-is-a-bst) |
 | [1482-how-many-numbers-are-smaller-than-the-current-number](https://github.com/rohitkr7/LeetCode/tree/master/1482-how-many-numbers-are-smaller-than-the-current-number) |
 ## Sorting
@@ -92,4 +94,5 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | ------- |
 | [0303-range-sum-query-immutable](https://github.com/rohitkr7/LeetCode/tree/master/0303-range-sum-query-immutable) |
 | [0525-contiguous-array](https://github.com/rohitkr7/LeetCode/tree/master/0525-contiguous-array) |
+| [0560-subarray-sum-equals-k](https://github.com/rohitkr7/LeetCode/tree/master/0560-subarray-sum-equals-k) |
 <!---LeetCode Topics End-->
