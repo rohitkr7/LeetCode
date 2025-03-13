@@ -85,6 +85,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 |  |
 | ------- |
 | [0141-linked-list-cycle](https://github.com/rohitkr7/LeetCode/tree/master/0141-linked-list-cycle) |
+| [0206-reverse-linked-list](https://github.com/rohitkr7/LeetCode/tree/master/0206-reverse-linked-list) |
 ## Design
 |  |
 | ------- |
@@ -95,4 +96,8 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | [0303-range-sum-query-immutable](https://github.com/rohitkr7/LeetCode/tree/master/0303-range-sum-query-immutable) |
 | [0525-contiguous-array](https://github.com/rohitkr7/LeetCode/tree/master/0525-contiguous-array) |
 | [0560-subarray-sum-equals-k](https://github.com/rohitkr7/LeetCode/tree/master/0560-subarray-sum-equals-k) |
+## Recursion
+|  |
+| ------- |
+| [0206-reverse-linked-list](https://github.com/rohitkr7/LeetCode/tree/master/0206-reverse-linked-list) |
 <!---LeetCode Topics End-->
