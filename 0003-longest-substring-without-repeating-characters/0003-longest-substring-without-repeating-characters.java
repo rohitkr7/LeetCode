@@ -15,4 +15,20 @@ class Solution {
         }
         return maxLength;
     }
+
+    // alternate solution found but not clear to me yet
+    public int lengthOfLongestSubstring_faster(String s) {
+        int n = s.length();
+        int maxLength = 0;
+        int[] lastIndex = new int[128];
+        
+        for (int left = 0, right = 0; right < n; right++) {
+            char currentChar = s.charAt(right);
+            left = Math.max(left, lastIndex[currentChar]);
+            maxLength = Math.max(maxLength, right - left + 1);
+            lastIndex[currentChar] = right + 1;
+        }
+        
+        return maxLength;
+    }
 }
