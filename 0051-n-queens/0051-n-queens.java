@@ -17,9 +17,28 @@ class Solution {
         return res;
     }
 
+    static void dfs(int col, char[][] board, List<List<String>> res) {
+        if (col == board.length) {
+            res.add(construct(board));
+            return;
+        }
+
+        for (int row = 0; row < board.length; row++) {
+            if (isSafe(board, row, col)) {
+                // Add Queen to current position
+                board[row][col] = 'Q';
+                // Try to add queen to the next col now
+                dfs(col + 1, board, res);
+                // Remove the queen to try out other otions: backtracking
+                board[row][col] = '.';
+            }
+        }
+    }
+
     static boolean isSafe(char[][] board, int row, int col) {
         int duprow = row;
         int dupcol = col;
+        // check left-up diagonal
         while (row >= 0 && col >= 0) {
             if (board[row][col] == 'Q')
                 return false;
@@ -29,6 +48,7 @@ class Solution {
 
         row = duprow;
         col = dupcol;
+        // check on the current row left side horizontally
         while (col >= 0) {
             if (board[row][col] == 'Q')
                 return false;
@@ -37,6 +57,7 @@ class Solution {
 
         row = duprow;
         col = dupcol;
+        // check on the left-downn diagonal
         while (col >= 0 && row < board.length) {
             if (board[row][col] == 'Q')
                 return false;
@@ -46,22 +67,8 @@ class Solution {
         return true;
     }
 
-    static void dfs(int col, char[][] board, List<List<String>> res) {
-        if (col == board.length) {
-            res.add(construct(board));
-            return;
-        }
-
-        for (int row = 0; row < board.length; row++) {
-            if (isSafe(board, row, col)) {
-                board[row][col] = 'Q';
-                dfs(col + 1, board, res);
-                board[row][col] = '.';
-            }
-        }
-    }
-
     static List<String> construct(char[][] board) {
+        // Creating a list from the 2D board
         List<String> res = new LinkedList<String>();
         for (int i = 0; i < board.length; i++) {
             String s = new String(board[i]);
