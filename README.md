@@ -10,6 +10,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | [0011-container-with-most-water](https://github.com/rohitkr7/LeetCode/tree/master/0011-container-with-most-water) |
 | [0033-search-in-rotated-sorted-array](https://github.com/rohitkr7/LeetCode/tree/master/0033-search-in-rotated-sorted-array) |
 | [0046-permutations](https://github.com/rohitkr7/LeetCode/tree/master/0046-permutations) |
+| [0049-group-anagrams](https://github.com/rohitkr7/LeetCode/tree/master/0049-group-anagrams) |
 | [0051-n-queens](https://github.com/rohitkr7/LeetCode/tree/master/0051-n-queens) |
 | [0053-maximum-subarray](https://github.com/rohitkr7/LeetCode/tree/master/0053-maximum-subarray) |
 | [0054-spiral-matrix](https://github.com/rohitkr7/LeetCode/tree/master/0054-spiral-matrix) |
@@ -62,6 +63,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | ------- |
 | [0001-two-sum](https://github.com/rohitkr7/LeetCode/tree/master/0001-two-sum) |
 | [0003-longest-substring-without-repeating-characters](https://github.com/rohitkr7/LeetCode/tree/master/0003-longest-substring-without-repeating-characters) |
+| [0049-group-anagrams](https://github.com/rohitkr7/LeetCode/tree/master/0049-group-anagrams) |
 | [0073-set-matrix-zeroes](https://github.com/rohitkr7/LeetCode/tree/master/0073-set-matrix-zeroes) |
 | [0076-minimum-window-substring](https://github.com/rohitkr7/LeetCode/tree/master/0076-minimum-window-substring) |
 | [0141-linked-list-cycle](https://github.com/rohitkr7/LeetCode/tree/master/0141-linked-list-cycle) |
@@ -76,6 +78,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 ## Sorting
 |  |
 | ------- |
+| [0049-group-anagrams](https://github.com/rohitkr7/LeetCode/tree/master/0049-group-anagrams) |
 | [0215-kth-largest-element-in-an-array](https://github.com/rohitkr7/LeetCode/tree/master/0215-kth-largest-element-in-an-array) |
 | [0217-contains-duplicate](https://github.com/rohitkr7/LeetCode/tree/master/0217-contains-duplicate) |
 | [0242-valid-anagram](https://github.com/rohitkr7/LeetCode/tree/master/0242-valid-anagram) |
@@ -179,6 +182,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 |  |
 | ------- |
 | [0003-longest-substring-without-repeating-characters](https://github.com/rohitkr7/LeetCode/tree/master/0003-longest-substring-without-repeating-characters) |
+| [0049-group-anagrams](https://github.com/rohitkr7/LeetCode/tree/master/0049-group-anagrams) |
 | [0076-minimum-window-substring](https://github.com/rohitkr7/LeetCode/tree/master/0076-minimum-window-substring) |
 | [0242-valid-anagram](https://github.com/rohitkr7/LeetCode/tree/master/0242-valid-anagram) |
 ## Sliding Window
