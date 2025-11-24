@@ -11,7 +11,16 @@ class Solution {
                 freq[c - 'a'] += 1;
             }
 
-            String key = Arrays.toString(freq);
+            // String key = Arrays.toString(freq);
+
+            // ⚡ OPTIMIZATION: Pre-allocate StringBuilder size
+            // Max: 26 numbers * ~2 digits + 26 delimiters = ~80 chars
+            StringBuilder keyBuilder = new StringBuilder(80);
+            for (int count : freq) {
+                keyBuilder.append('#').append(count);
+            }
+
+            String key = keyBuilder.toString();
 
             if (map.containsKey(key)) {
                 map.get(key).add(str);
