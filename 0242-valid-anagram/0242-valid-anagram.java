@@ -10,12 +10,11 @@ class Solution {
         }
 
         for (char c : t.toCharArray()) {
-            freqMap[c - 'a'] -= 1;
-        }
+            if (freqMap[c - 'a'] == 0) {
+                return false; // Character not in s, or used too many times
+            }
 
-        for (int val : freqMap) {
-            if (val != 0)
-                return false;
+            freqMap[c - 'a'] -= 1;
         }
 
         return true;
