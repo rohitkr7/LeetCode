@@ -1,17 +1,12 @@
 class Solution {
     public int[] twoSum(int[] nums, int target) {
-        Map<Integer, Integer> seenItems = new HashMap<>();
-
+        HashMap<Integer, Integer> hm = new HashMap<Integer, Integer>();
         for (int i = 0; i < nums.length; i++) {
-            int complement = target - nums[i];
-
-            if (seenItems.containsKey(complement)) {
-                return new int[] { seenItems.get(complement), i };
+            if (hm.containsKey(target - nums[i])) {
+                return new int[] { hm.get(target - nums[i]), i };
             }
-
-            seenItems.put(nums[i], i);
+            hm.put(nums[i], i);
         }
-
-        return new int[] {}; // Should never reach here per problem constraints
+        return new int[] {};
     }
 }
