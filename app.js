@@ -395,9 +395,9 @@ function startApp() {
     }
 
     function getDifficultyBadge(diff) {
-        if (diff === 'Easy') return '<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-500/10 text-lc-easy border border-emerald-500/30">Easy</span>';
-        if (diff === 'Medium') return '<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-amber-500/10 text-lc-medium border border-amber-500/30">Medium</span>';
-        return '<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-rose-500/10 text-lc-hard border border-rose-500/30">Hard</span>';
+        if (diff === 'Easy') return '<span class="inline-flex items-center px-2 sm:px-2.5 py-0.5 rounded-full text-[11px] sm:text-xs font-semibold bg-emerald-500/10 text-lc-easy border border-emerald-500/30">Easy</span>';
+        if (diff === 'Medium') return '<span class="inline-flex items-center px-2 sm:px-2.5 py-0.5 rounded-full text-[11px] sm:text-xs font-semibold bg-amber-500/10 text-lc-medium border border-amber-500/30">Medium</span>';
+        return '<span class="inline-flex items-center px-2 sm:px-2.5 py-0.5 rounded-full text-[11px] sm:text-xs font-semibold bg-rose-500/10 text-lc-hard border border-rose-500/30">Hard</span>';
     }
 
     function renderTable() {
@@ -418,18 +418,18 @@ function startApp() {
 
             return `
                 <tr class="problem-row cursor-pointer transition-colors group" data-id="${p.id}">
-                    <td class="py-3.5 px-4 text-center font-mono text-xs font-semibold text-slate-400 group-hover:text-white">
+                    <td class="py-3 px-2.5 sm:px-4 text-center font-mono text-xs font-semibold text-slate-400 group-hover:text-white">
                         #${p.id}
                     </td>
-                    <td class="py-3.5 px-4">
-                        <div class="flex items-center gap-2">
-                            <span class="font-semibold text-slate-100 group-hover:text-lc-cyan transition-colors">${p.title}</span>
-                            <a href="${p.leetcodeUrl}" target="_blank" onclick="event.stopPropagation()" title="Open on LeetCode" class="text-slate-500 hover:text-lc-gold transition-colors opacity-0 group-hover:opacity-100">
+                    <td class="py-3 px-2 sm:px-4 min-w-0">
+                        <div class="flex items-center gap-1.5 sm:gap-2">
+                            <span class="font-semibold text-slate-100 group-hover:text-lc-cyan transition-colors text-xs sm:text-sm break-words">${p.title}</span>
+                            <a href="${p.leetcodeUrl}" target="_blank" onclick="event.stopPropagation()" title="Open on LeetCode" class="shrink-0 text-slate-500 hover:text-lc-gold transition-colors opacity-70 sm:opacity-0 sm:group-hover:opacity-100">
                                 <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
                             </a>
                         </div>
                     </td>
-                    <td class="py-3.5 px-4 whitespace-nowrap">
+                    <td class="py-3 px-2 sm:px-4 text-center sm:text-left whitespace-nowrap">
                         ${getDifficultyBadge(p.difficulty)}
                     </td>
                     <td class="py-3.5 px-4 hidden md:table-cell">
@@ -437,7 +437,7 @@ function startApp() {
                             ${topicsHtml}
                         </div>
                     </td>
-                    <td class="py-3.5 px-4 text-right whitespace-nowrap">
+                    <td class="py-3.5 px-4 text-right whitespace-nowrap hidden sm:table-cell">
                         <button type="button" class="view-btn px-3 py-1.5 rounded-lg text-xs font-semibold text-white bg-slate-800 hover:bg-slate-700 border border-slate-700 group-hover:border-slate-600 transition-all inline-flex items-center gap-1.5">
                             <span>Solution</span>
                             <svg class="w-3 h-3 text-slate-400 group-hover:text-lc-cyan" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
