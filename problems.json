@@ -682,7 +682,7 @@
     "folder": "0236-lowest-common-ancestor-of-a-binary-tree",
     "leetcodeUrl": "https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/",
     "javaFile": "0236-lowest-common-ancestor-of-a-binary-tree/0236-lowest-common-ancestor-of-a-binary-tree.java",
-    "readmeFile": null,
+    "readmeFile": "0236-lowest-common-ancestor-of-a-binary-tree/README.md",
     "difficulty": "Medium",
     "topics": [
       "Tree / BST"

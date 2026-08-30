@@ -1,0 +1,46 @@
+name: Auto-Sync LeetCode Problems
+
+on:
+  schedule:
+    # Runs automatically once every 24 hours (midnight UTC)
+    - cron: '0 0 * * *'
+  # Allows manual 1-click trigger from GitHub Actions tab
+  workflow_dispatch:
+  # Allows triggering via webhook from external repositories
+  repository_dispatch:
+    types: [leetcode-updated]
+
+permissions:
+  contents: write
+
+jobs:
+  sync-problems:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Run Sync Script
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          node scripts/sync-problems.js
+
+      - name: Commit and Push changes
+        run: |
+          git config --local user.name "github-actions[bot]"
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          if git status --porcelain problems.json | grep -q 'problems.json'; then
+            git add problems.json
+            git commit -m "chore(data): auto-sync problems.json from leetcode-problem-solving [skip ci]"
+            git push origin main
+            echo "Successfully updated problems.json and pushed to main."
+          else
+            echo "No new problems detected. problems.json is already up to date."
+          fi
