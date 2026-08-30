@@ -53,8 +53,58 @@ function startApp() {
     const modalTags = document.getElementById('modal-tags');
     const modalLeetcodeLink = document.getElementById('modal-leetcode-link');
     const modalGithubLink = document.getElementById('modal-github-link');
+    const modalPre = document.getElementById('modal-pre');
+    const wrapBtn = document.getElementById('wrap-code-btn');
+    const wrapText = document.getElementById('wrap-text');
     const copyBtn = document.getElementById('copy-code-btn');
     const copyText = document.getElementById('copy-text');
+    let isWordWrap = localStorage.getItem('lc_viewer_word_wrap') === 'true';
+    let currentRawCode = '';
+
+    function renderCodeContent(rawCode) {
+        currentRawCode = rawCode || '';
+        try {
+            const highlighted = Prism.highlight(currentRawCode, Prism.languages.java || Prism.languages.clike, 'java');
+            const lines = highlighted.split('\n');
+            let openTags = [];
+            const formattedLines = lines.map((line, idx) => {
+                let linePrefix = openTags.join('');
+                const tagRegex = /<\/?([a-z0-9-]+)(?:\s+[^>]*)?>/gi;
+                let match;
+                while ((match = tagRegex.exec(line)) !== null) {
+                    if (match[0].startsWith('</')) {
+                        openTags.pop();
+                    } else if (!match[0].endsWith('/>')) {
+                        openTags.push(match[0]);
+                    }
+                }
+                let lineSuffix = openTags.map(t => `</${t.match(/<([a-z0-9-]+)/i)[1]}>`).reverse().join('');
+                return `<div class="code-line"><span class="code-line-num">${idx + 1}</span><span class="code-line-content">${linePrefix}${line || ' '}${lineSuffix}</span></div>`;
+            });
+            modalCode.innerHTML = formattedLines.join('');
+        } catch (e) {
+            modalCode.textContent = currentRawCode;
+        }
+    }
+
+    function updateWordWrapUI() {
+        if (modalPre) {
+            modalPre.classList.toggle('code-wrapped', isWordWrap);
+        }
+        if (wrapBtn) {
+            if (isWordWrap) {
+                wrapBtn.classList.add('border-lc-gold/70', 'text-lc-gold', 'bg-amber-500/15');
+                wrapBtn.classList.remove('text-slate-300', 'bg-slate-800');
+                if (wrapText) wrapText.textContent = 'Wrapped';
+                wrapBtn.setAttribute('title', 'Word Wrap: ON (Click to disable)');
+            } else {
+                wrapBtn.classList.remove('border-lc-gold/70', 'text-lc-gold', 'bg-amber-500/15');
+                wrapBtn.classList.add('text-slate-300', 'bg-slate-800');
+                if (wrapText) wrapText.textContent = 'Wrap';
+                wrapBtn.setAttribute('title', 'Word Wrap: OFF (Click to enable)');
+            }
+        }
+    }
 
     // --- Topic Classification Rules for Newly Added Problems ---
     const topicRules = [
@@ -476,8 +526,7 @@ function startApp() {
         }
 
         // Show loading state for code and description
-        modalCode.textContent = '// Fetching solution from GitHub repository...';
-        Prism.highlightElement(modalCode);
+        renderCodeContent('// Fetching solution from GitHub repository...');
         modalDesc.innerHTML = `<div class="animate-pulse text-xs text-slate-400 py-2">Loading problem description from repository...</div>`;
 
         // Reset copy button
@@ -486,6 +535,7 @@ function startApp() {
         // Open modal with smooth transition
         modal.classList.remove('hidden');
         document.body.style.overflow = 'hidden';
+        updateWordWrapUI();
 
         // 1. Fetch Java Code dynamically from raw GitHub
         const rawCodeUrl = `https://raw.githubusercontent.com/${GITHUB_REPO}/main/${problem.javaFile || problem.folder + '/' + problem.folder + '.java'}`;
@@ -493,15 +543,12 @@ function startApp() {
             const codeRes = await fetch(rawCodeUrl);
             if (codeRes.ok) {
                 const code = await codeRes.text();
-                modalCode.textContent = code;
-                Prism.highlightElement(modalCode);
+                renderCodeContent(code);
             } else {
-                modalCode.textContent = `// Solution file available on GitHub:\n// https://github.com/${GITHUB_REPO}/tree/main/${problem.folder}`;
-                Prism.highlightElement(modalCode);
+                renderCodeContent(`// Solution file available on GitHub:\n// https://github.com/${GITHUB_REPO}/tree/main/${problem.folder}`);
             }
         } catch (e) {
-            modalCode.textContent = `// Could not load raw file directly. View on GitHub:\n// https://github.com/${GITHUB_REPO}/tree/main/${problem.folder}`;
-            Prism.highlightElement(modalCode);
+            renderCodeContent(`// Could not load raw file directly. View on GitHub:\n// https://github.com/${GITHUB_REPO}/tree/main/${problem.folder}`);
         }
 
         // 2. Fetch Description from README.md
@@ -619,7 +666,7 @@ function startApp() {
 
         // Copy Code Button
         copyBtn.addEventListener('click', () => {
-            const code = modalCode.textContent;
+            const code = currentRawCode || modalCode.textContent;
             navigator.clipboard.writeText(code).then(() => {
                 copyText.textContent = 'Copied!';
                 setTimeout(() => {
@@ -629,9 +676,21 @@ function startApp() {
                 console.error('Failed to copy!', err);
             });
         });
+
+        // Word Wrap Toggle Button
+        if (wrapBtn) {
+            wrapBtn.addEventListener('click', () => {
+                isWordWrap = !isWordWrap;
+                try {
+                    localStorage.setItem('lc_viewer_word_wrap', isWordWrap);
+                } catch (e) {}
+                updateWordWrapUI();
+            });
+        }
     }
 
     // Start App
+    updateWordWrapUI();
     init();
 }
 
