@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>LeetCode Problem Solutions — Java Solutions</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23FFA116'><path d='M13.483 0a1.374 1.374 0 0 0-.961.438L7.116 6.226l-3.854 4.126a5.266 5.266 0 0 0-1.209 2.104 5.35 5.35 0 0 0-.125.513 5.527 5.527 0 0 0 .062 2.362 5.83 5.83 0 0 0 .349 1.017 5.939 5.939 0 0 0 1.271 1.541l11.967 11.695a1.374 1.374 0 0 0 1.954 0 1.374 1.374 0 0 0 0-1.954l-11.968-11.695a3.21 3.21 0 0 1-.685-.828 3.125 3.125 0 0 1-.365-1.127 3.09 3.09 0 0 1 .054-1.246 3.064 3.064 0 0 1 .521-1.109l3.854-4.126 5.406-5.788a1.374 1.374 0 0 0-.91-2.327h-.001zM20.518 14.1a1.374 1.374 0 0 0-.961.438l-2.484 2.659a1.374 1.374 0 0 0 .041 1.944l.036.035a1.374 1.374 0 0 0 1.908-.04l2.485-2.659a1.374 1.374 0 0 0-.041-1.944l-.036-.035a1.374 1.374 0 0 0-.948-.398z'/></svg>">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'Inter', 'sans-serif'],
+                        mono: ['"Fira Code"', 'monospace'],
+                    },
+                    colors: {
+                        lc: {
+                            bg: '#0B1120',
+                            card: '#131D33',
+                            surface: '#1E293B',
+                            hover: '#22304A',
+                            gold: '#FFA116',
+                            cyan: '#38BDF8',
+                            easy: '#00B8A3',
+                            medium: '#FFC01E',
+                            hard: '#FF375F',
+                            border: '#1E293B'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Prism.js for Syntax Highlighting -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet" />
+
+    <style>
+        /* Custom scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 7px;
+            height: 7px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0B1120;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1E293B;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #334155;
+        }
+        
+        pre[class*="language-"] {
+            margin: 0;
+            border-radius: 0.75rem;
+            background: #0d1322 !important;
+            font-size: 0.875rem;
+        }
+
+        .tab-active {
+            background-color: #FFA116 !important;
+            color: #0F172A !important;
+            font-weight: 700 !important;
+        }
+
+        .problem-row:hover {
+            background-color: rgba(30, 41, 59, 0.65);
+        }
+
+        .problem-description h2, .problem-description h3, .problem-description h4 {
+            display: none;
+        }
+        .problem-description hr {
+            display: none;
+        }
+        .problem-description code {
+            background: #1e293b;
+            padding: 0.15rem 0.4rem;
+            border-radius: 0.25rem;
+            font-family: "Fira Code", monospace;
+            font-size: 0.85em;
+            color: #38bdf8;
+        }
+        .problem-description pre {
+            background: #0f172a !important;
+            border: 1px solid #334155;
+            padding: 0.875rem;
+            border-radius: 0.5rem;
+            margin: 0.75rem 0;
+            overflow-x: auto;
+        }
+        .problem-description ul {
+            list-style-type: disc;
+            margin-left: 1.5rem;
+            margin-top: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+    </style>
+</head>
+<body class="bg-lc-bg text-slate-200 font-sans antialiased min-h-screen flex flex-col selection:bg-lc-gold/30 selection:text-white">
+
+    <!-- Header -->
+    <header class="sticky top-0 z-40 w-full backdrop-blur-md bg-slate-950/90 border-b border-slate-800/80 py-3.5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between gap-4">
+                <!-- Logo & Branding -->
+                <div class="flex items-center gap-3 shrink-0">
+                    <div class="w-8 h-8 min-w-[2rem] max-w-[2rem] max-h-[2rem] shrink-0 rounded-lg bg-gradient-to-tr from-amber-500/20 to-amber-500/10 border border-amber-500/30 flex items-center justify-center text-lc-gold shadow-sm shadow-amber-500/10 overflow-hidden">
+                        <svg class="w-5 h-5 shrink-0" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M13.483 0a1.374 1.374 0 0 0-.961.438L7.116 6.226l-3.854 4.126a5.266 5.266 0 0 0-1.209 2.104 5.35 5.35 0 0 0-.125.513 5.527 5.527 0 0 0 .062 2.362 5.83 5.83 0 0 0 .349 1.017 5.939 5.939 0 0 0 1.271 1.541l11.967 11.695a1.374 1.374 0 0 0 1.954 0 1.374 1.374 0 0 0 0-1.954l-11.968-11.695a3.21 3.21 0 0 1-.685-.828 3.125 3.125 0 0 1-.365-1.127 3.09 3.09 0 0 1 .054-1.246 3.064 3.064 0 0 1 .521-1.109l3.854-4.126 5.406-5.788a1.374 1.374 0 0 0-.91-2.327h-.001zM20.518 14.1a1.374 1.374 0 0 0-.961.438l-2.484 2.659a1.374 1.374 0 0 0 .041 1.944l.036.035a1.374 1.374 0 0 0 1.908-.04l2.485-2.659a1.374 1.374 0 0 0-.041-1.944l-.036-.035a1.374 1.374 0 0 0-.948-.398z"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <h1 class="text-base sm:text-lg font-bold tracking-tight text-white whitespace-nowrap">LeetCode Problem Solutions</h1>
+                            <span class="text-[11px] font-semibold px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700 font-mono">Java</span>
+                        </div>
+                        <p class="text-xs text-slate-400 hidden sm:block">Automated Live Viewer &bull; <a href="https://github.com/rohitkr7/leetcode-problem-solving" target="_blank" class="hover:text-lc-cyan transition-colors">rohitkr7/leetcode-problem-solving</a></p>
+                    </div>
+                </div>
+
+                <!-- Action Controls & External Links -->
+                <div class="flex items-center gap-2.5 shrink-0">
+                    <!-- Live Sync Indicator -->
+                    <button id="sync-btn" title="Click to sync newly added problems from GitHub" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-700/80 transition-all shadow-sm">
+                        <span id="sync-indicator" class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shrink-0"></span>
+                        <span id="sync-text" class="hidden sm:inline font-mono">Live Synced</span>
+                        <svg id="sync-icon" class="w-3.5 h-3.5 text-slate-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                        </svg>
+                    </button>
+
+                    <a href="https://rohitkr7.github.io/" target="_blank" class="text-xs font-semibold text-slate-300 hover:text-lc-cyan px-3 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 border border-slate-700/80 transition-colors hidden md:inline-block">Portfolio</a>
+                    
+                    <a href="https://github.com/rohitkr7/leetcode-problem-solving" target="_blank" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-white border border-slate-700/80 transition-colors text-xs font-semibold" title="View GitHub Repository">
+                        <svg class="w-4 h-4 shrink-0" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd"/></svg>
+                        <span class="hidden sm:inline">GitHub</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 w-full space-y-6">
+        
+        <!-- Summary Stats & Topics Distribution Row -->
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-4" id="stats-container">
+            <!-- Left 4 Cards (7 cols on md+) -->
+            <div class="md:col-span-7 grid grid-cols-2 sm:grid-cols-4 gap-3" id="stats-cards">
+                <div class="bg-lc-card rounded-xl p-4 border border-slate-800 animate-pulse h-28"></div>
+                <div class="bg-lc-card rounded-xl p-4 border border-slate-800 animate-pulse h-28"></div>
+                <div class="bg-lc-card rounded-xl p-4 border border-slate-800 animate-pulse h-28"></div>
+                <div class="bg-lc-card rounded-xl p-4 border border-slate-800 animate-pulse h-28"></div>
+            </div>
+
+            <!-- Right Widget: Top Categories (5 cols on md+) -->
+            <div class="md:col-span-5 bg-lc-card rounded-xl p-4 sm:p-5 border border-slate-800/90 shadow-lg flex flex-col justify-between" id="stats-topic-widget">
+                <div class="animate-pulse h-24 bg-slate-800/50 rounded-lg"></div>
+            </div>
+        </div>
+
+        <!-- Unified Controls & Filter Bar -->
+        <div class="bg-lc-card rounded-xl p-4 border border-slate-800/90 shadow-xl flex flex-col md:flex-row gap-3 items-stretch md:items-center justify-between">
+            <!-- Search Input -->
+            <div class="relative flex-1 min-w-[260px]">
+                <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                    <svg class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
+                    </svg>
+                </div>
+                <input type="text" id="search-input" class="block w-full pl-10 pr-4 py-2 text-sm border border-slate-700/80 rounded-lg bg-slate-900 text-slate-200 placeholder-slate-400 focus:outline-none focus:ring-1 focus:ring-lc-cyan focus:border-lc-cyan transition-all" placeholder="Search by #, title, topic or keyword...">
+            </div>
+
+            <!-- Filters Group -->
+            <div class="flex flex-wrap items-center gap-2.5">
+                <!-- Difficulty Segmented Control -->
+                <div class="inline-flex rounded-lg p-1 bg-slate-900 border border-slate-700/80" id="difficulty-filters">
+                    <button type="button" data-diff="All" class="filter-btn tab-active px-3 py-1.5 text-xs font-semibold rounded-md transition-all">All</button>
+                    <button type="button" data-diff="Easy" class="filter-btn text-slate-400 hover:text-lc-easy px-3 py-1.5 text-xs font-semibold rounded-md transition-all">Easy</button>
+                    <button type="button" data-diff="Medium" class="filter-btn text-slate-400 hover:text-lc-medium px-3 py-1.5 text-xs font-semibold rounded-md transition-all">Medium</button>
+                    <button type="button" data-diff="Hard" class="filter-btn text-slate-400 hover:text-lc-hard px-3 py-1.5 text-xs font-semibold rounded-md transition-all">Hard</button>
+                </div>
+
+                <!-- Topic Selector Dropdown -->
+                <select id="topic-select" class="px-3 py-2 text-xs font-medium border border-slate-700/80 rounded-lg bg-slate-900 text-slate-300 focus:outline-none focus:ring-1 focus:ring-lc-cyan max-w-[200px] truncate">
+                    <option value="All">All Topics & Patterns</option>
+                </select>
+
+                <!-- Sorting Dropdown -->
+                <select id="sort-select" class="px-3 py-2 text-xs font-medium border border-slate-700/80 rounded-lg bg-slate-900 text-slate-300 focus:outline-none focus:ring-1 focus:ring-lc-cyan">
+                    <option value="id-asc"># Number (Asc)</option>
+                    <option value="id-desc"># Number (Desc)</option>
+                    <option value="diff-asc">Difficulty (Easy &rarr; Hard)</option>
+                    <option value="diff-desc">Difficulty (Hard &rarr; Easy)</option>
+                    <option value="title-asc">Title (A &rarr; Z)</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Problems List / Table View -->
+        <div class="bg-lc-card rounded-xl border border-slate-800 shadow-xl overflow-hidden">
+            <!-- Table Header Bar -->
+            <div class="px-5 py-3.5 bg-slate-900/90 border-b border-slate-800 flex items-center justify-between text-xs text-slate-400">
+                <span id="results-count" class="font-semibold text-slate-300">Loading problems...</span>
+                <span class="font-mono text-slate-500 text-[11px] hidden sm:inline">Click any row to view code solution</span>
+            </div>
+
+            <!-- Responsive Table -->
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse" id="problems-table">
+                    <thead>
+                        <tr class="border-b border-slate-800 bg-slate-900/50 text-[11px] font-bold uppercase tracking-wider text-slate-400 select-none">
+                            <th class="py-3.5 px-4 w-20 text-center cursor-pointer hover:text-white transition-colors" id="th-id">#</th>
+                            <th class="py-3.5 px-4 cursor-pointer hover:text-white transition-colors" id="th-title">Problem Title</th>
+                            <th class="py-3.5 px-4 w-32 cursor-pointer hover:text-white transition-colors" id="th-diff">Difficulty</th>
+                            <th class="py-3.5 px-4 hidden md:table-cell">Topics / Tags</th>
+                            <th class="py-3.5 px-4 w-36 text-right">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="problems-tbody" class="divide-y divide-slate-800/60 text-sm">
+                        <!-- Populated via JS -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Empty State -->
+            <div id="empty-state" class="hidden text-center py-16 px-4">
+                <div class="w-12 h-12 rounded-full bg-slate-800/80 border border-slate-700 flex items-center justify-center mx-auto mb-3 text-slate-400">
+                    <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                </div>
+                <h3 class="text-sm font-semibold text-white">No matching solutions found</h3>
+                <p class="text-xs text-slate-400 mt-1 max-w-sm mx-auto">Try clearing your search query or switching your topic/difficulty filter.</p>
+                <div class="mt-4">
+                    <button type="button" id="clear-filters-btn" class="inline-flex items-center px-3.5 py-1.5 border border-slate-700 shadow-sm text-xs font-semibold rounded-lg text-white bg-slate-800 hover:bg-slate-700 transition-colors">
+                        Reset Filters
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="mt-auto border-t border-slate-800/80 py-6 text-center text-xs text-slate-500">
+        <p>Built with Vanilla JavaScript & Tailwind CSS &bull; Auto-synced with <a href="https://github.com/rohitkr7/leetcode-problem-solving" target="_blank" class="text-slate-400 hover:text-lc-cyan underline decoration-slate-700">rohitkr7/leetcode-problem-solving</a></p>
+    </footer>
+
+    <!-- Code Viewer Modal / Drawer -->
+    <div id="code-modal" class="fixed inset-0 z-50 hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+        <!-- Backdrop -->
+        <div class="fixed inset-0 bg-black/80 backdrop-blur-sm transition-opacity" id="modal-backdrop"></div>
+      
+        <div class="fixed inset-0 z-10 overflow-y-auto">
+            <div class="flex min-h-full items-center justify-center p-3 sm:p-6 text-center">
+                <!-- Modal Panel -->
+                <div class="relative transform overflow-hidden rounded-2xl bg-lc-card text-left shadow-2xl transition-all w-full max-w-4xl border border-slate-700/80 flex flex-col max-h-[90vh]" id="modal-panel">
+                    
+                    <!-- Header -->
+                    <div class="bg-slate-900 px-5 py-4 flex items-center justify-between border-b border-slate-800 gap-4">
+                        <div class="flex items-center gap-3 min-w-0">
+                            <span id="modal-id" class="text-slate-400 font-mono text-sm font-semibold bg-slate-800 px-2 py-0.5 rounded border border-slate-700 shrink-0"></span>
+                            <h3 class="text-base sm:text-lg font-bold text-white tracking-tight truncate" id="modal-title">Problem Title</h3>
+                            <span id="modal-difficulty" class="shrink-0"></span>
+                        </div>
+                        <button type="button" id="modal-close-btn" class="p-1.5 rounded-lg bg-slate-800 text-slate-400 hover:text-white hover:bg-slate-700 transition-colors shrink-0" title="Close (Esc)">
+                            <svg class="w-5 h-5 shrink-0" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+                    </div>
+                    
+                    <!-- Modal Scrollable Body -->
+                    <div class="p-5 sm:p-6 text-slate-300 overflow-y-auto space-y-5">
+                        
+                        <!-- Problem Statement / Description Collapsible -->
+                        <div id="modal-readme-section" class="bg-slate-900/60 rounded-xl p-4 border border-slate-800/80">
+                            <div class="flex justify-between items-center mb-2">
+                                <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
+                                    <svg class="w-4 h-4 text-lc-cyan" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+                                    Problem Statement
+                                </h4>
+                            </div>
+                            <div id="modal-description" class="problem-description text-sm text-slate-300 space-y-2 leading-relaxed">
+                                <div class="animate-pulse py-2 text-slate-500 text-xs font-mono">Loading problem statement from repository...</div>
+                            </div>
+                        </div>
+
+                        <!-- Java Code Section -->
+                        <div class="rounded-xl border border-slate-800 overflow-hidden shadow-inner">
+                            <div class="flex justify-between items-center bg-slate-900/90 px-4 py-2.5 border-b border-slate-800">
+                                <div class="flex items-center gap-2">
+                                    <span class="w-3 h-3 rounded-full bg-red-500/80 inline-block"></span>
+                                    <span class="w-3 h-3 rounded-full bg-yellow-500/80 inline-block"></span>
+                                    <span class="w-3 h-3 rounded-full bg-green-500/80 inline-block"></span>
+                                    <span class="text-xs text-slate-400 font-mono ml-2" id="modal-file-name">Solution.java</span>
+                                </div>
+                                <button id="copy-code-btn" class="px-2.5 py-1 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition-colors flex items-center gap-1.5 text-xs font-medium border border-slate-700">
+                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                                    <span id="copy-text">Copy Code</span>
+                                </button>
+                            </div>
+                            <div class="relative bg-[#0d1322] max-h-96 overflow-y-auto">
+                                <pre class="line-numbers"><code id="modal-code" class="language-java"></code></pre>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Footer Actions -->
+                    <div class="bg-slate-900/90 px-5 py-3.5 flex flex-wrap gap-2.5 justify-between items-center border-t border-slate-800">
+                        <div class="flex items-center gap-2 text-xs text-slate-400" id="modal-tags">
+                            <!-- Tags populated here -->
+                        </div>
+                        <div class="flex items-center gap-2.5">
+                            <a id="modal-github-link" href="#" target="_blank" class="inline-flex items-center justify-center rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 px-3 py-1.5 text-xs font-semibold border border-slate-700 transition-colors">
+                                View in GitHub
+                                <svg class="ml-1.5 w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd"/></svg>
+                            </a>
+                            <a id="modal-leetcode-link" href="#" target="_blank" class="inline-flex items-center justify-center rounded-lg bg-lc-gold hover:bg-amber-400 text-slate-950 px-3 py-1.5 text-xs font-bold transition-colors shadow-sm">
+                                Open on LeetCode
+                                <svg class="ml-1.5 w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-java.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+    <!-- Inline Application Script for guaranteed zero-cache synchronization -->
+    <script>
+// LeetCode DSA Solutions Viewer - Dynamic GitHub Explorer
+function startApp() {
+    // --- State ---
+    let problems = [];
+    let filteredProblems = [];
+    let currentFilter = {
+        search: '',
+        difficulty: 'All',
+        topic: 'All',
+        sort: 'id-asc'
+    };
+    let uniqueTopics = new Set();
+    const CACHE_KEY = 'lc_viewer_problems_cache_v3';
+    const CACHE_TIME_KEY = 'lc_viewer_cache_timestamp_v3';
+    const GITHUB_REPO = 'rohitkr7/leetcode-problem-solving';
+
+    // Purge any legacy caches
+    try {
+        localStorage.clear();
+    } catch (e) {}
+
+    // --- DOM Elements ---
+    const statsCards = document.getElementById('stats-cards');
+    const statsTopicWidget = document.getElementById('stats-topic-widget');
+    const problemsTbody = document.getElementById('problems-tbody');
+    const resultsCount = document.getElementById('results-count');
+    const searchInput = document.getElementById('search-input');
+    const difficultyFilters = document.getElementById('difficulty-filters');
+    const topicSelect = document.getElementById('topic-select');
+    const sortSelect = document.getElementById('sort-select');
+    const emptyState = document.getElementById('empty-state');
+    const clearFiltersBtn = document.getElementById('clear-filters-btn');
+    const syncBtn = document.getElementById('sync-btn');
+    const syncText = document.getElementById('sync-text');
+    const syncIcon = document.getElementById('sync-icon');
+
+    // Table Header Sort Elements
+    const thId = document.getElementById('th-id');
+    const thTitle = document.getElementById('th-title');
+    const thDiff = document.getElementById('th-diff');
+
+    // Modal Elements
+    const modal = document.getElementById('code-modal');
+    const modalBackdrop = document.getElementById('modal-backdrop');
+    const modalPanel = document.getElementById('modal-panel');
+    const modalCloseBtn = document.getElementById('modal-close-btn');
+    const modalId = document.getElementById('modal-id');
+    const modalTitle = document.getElementById('modal-title');
+    const modalDiff = document.getElementById('modal-difficulty');
+    const modalDesc = document.getElementById('modal-description');
+    const modalCode = document.getElementById('modal-code');
+    const modalFileName = document.getElementById('modal-file-name');
+    const modalTags = document.getElementById('modal-tags');
+    const modalLeetcodeLink = document.getElementById('modal-leetcode-link');
+    const modalGithubLink = document.getElementById('modal-github-link');
+    const copyBtn = document.getElementById('copy-code-btn');
+    const copyText = document.getElementById('copy-text');
+
+    // --- Topic Classification Rules for Newly Added Problems ---
+    const topicRules = [
+        { topic: 'Linked List', regex: /linked-list|node|merge-two-sorted-lists|add-two-numbers|swap-nodes|reverse-linked/i },
+        { topic: 'Tree / BST', regex: /tree|bst|binary-tree|level-order|traversal|lca|lowest-common-ancestor|inorder|preorder|postorder/i },
+        { topic: 'Graph / DFS / BFS', regex: /graph|island|course-schedule|clone-graph|surrounded|pacific-atlantic|word-search|n-queens/i },
+        { topic: 'Dynamic Programming', regex: /dynamic-programming|climbing-stairs|house-robber|coin-change|longest-increasing|longest-common|word-break|edit-distance|minimum-path-sum/i },
+        { topic: 'Two Pointers', regex: /two-pointers|two-sum|3sum|container-with-most-water|trapping-rain-water|valid-palindrome|remove-duplicates|sort-colors/i },
+        { topic: 'Sliding Window', regex: /sliding-window|longest-substring|minimum-window|permutation-in-string|maximum-average/i },
+        { topic: 'Stack', regex: /stack|valid-parentheses|daily-temperatures|min-stack|evaluate-reverse-polish|generate-parentheses/i },
+        { topic: 'Binary Search', regex: /binary-search|search-in-rotated|find-minimum|search-a-2d-matrix|koko|median-of-two/i },
+        { topic: 'Array & Matrix', regex: /array|matrix|rotate-image|spiral-matrix|set-matrix|product-of-array|contains-duplicate|majority-element|maximum-subarray|pascals-triangle/i },
+        { topic: 'String', regex: /string|anagram|palindrome|parentheses|roman|integer-to-roman|longest-common-prefix/i },
+        { topic: 'Backtracking', regex: /backtracking|subsets|permutations|combination-sum|n-queens|generate-parentheses/i }
+    ];
+
+    function inferTopics(slug) {
+        const matched = [];
+        const lower = slug.toLowerCase();
+        for (const rule of topicRules) {
+            if (rule.regex.test(lower)) {
+                matched.push(rule.topic);
+            }
+        }
+        return matched.length > 0 ? matched : ['Algorithms'];
+    }
+
+    // --- Initialization & Data Fetching ---
+    async function init() {
+        setupEventListeners();
+
+        // 1. Always load baseline bundled problems.json first for guaranteed data integrity
+        let loadedFromSeed = false;
+        try {
+            const res = await fetch('problems.json');
+            if (res.ok) {
+                const data = await res.json();
+                if (Array.isArray(data) && data.length > 0) {
+                    setProblemsData(data);
+                    loadedFromSeed = true;
+                }
+            }
+        } catch (e) {
+            console.warn('Local problems.json fetch fallback:', e);
+        }
+
+        // Fallback to cache if offline / offline file fetch failed
+        if (!loadedFromSeed) {
+            try {
+                const rawCache = localStorage.getItem(CACHE_KEY);
+                if (rawCache) {
+                    const cached = JSON.parse(rawCache);
+                    if (Array.isArray(cached) && cached.length > 0) {
+                        setProblemsData(cached);
+                    }
+                }
+            } catch (e) {}
+        }
+
+        // 2. Synchronize dynamically with GitHub Git Trees API in background
+        syncWithGitHub(false);
+    }
+
+    async function syncWithGitHub(manualTrigger = false) {
+        if (manualTrigger) {
+            syncIcon.classList.add('animate-spin');
+            syncText.textContent = 'Syncing...';
+        }
+
+        try {
+            const apiUrl = `https://api.github.com/repos/${GITHUB_REPO}/git/trees/main?recursive=1`;
+            const response = await fetch(apiUrl);
+            
+            if (!response.ok) {
+                throw new Error(`GitHub API error: ${response.status}`);
+            }
+
+            const data = await response.json();
+            if (!data || !data.tree) throw new Error('Invalid tree format');
+
+            // Parse problem folders
+            const folderMap = new Map();
+            data.tree.forEach(item => {
+                const parts = item.path.split('/');
+                if (parts.length > 1 && /^\d{4}-/.test(parts[0])) {
+                    const folder = parts[0];
+                    if (!folderMap.has(folder)) {
+                        folderMap.set(folder, { folder, javaFile: null, readmeFile: null });
+                    }
+                    if (item.path.endsWith('.java')) {
+                        folderMap.get(folder).javaFile = item.path;
+                    }
+                    if (item.path.endsWith('README.md')) {
+                        folderMap.get(folder).readmeFile = item.path;
+                    }
+                }
+            });
+
+            // Existing problem map for preserving difficulty and topics if already known
+            const existingMap = new Map(problems.map(p => [p.id, p]));
+
+            const newProblemsList = [];
+            for (const [folder, info] of folderMap.entries()) {
+                const match = folder.match(/^(\d{4})-(.+)$/);
+                if (!match) continue;
+                const id = parseInt(match[1], 10);
+                const slug = match[2];
+                const title = slug.split('-').map(s => s.charAt(0).toUpperCase() + s.slice(1)).join(' ');
+                
+                const existing = existingMap.get(id);
+                newProblemsList.push({
+                    id,
+                    title: existing?.title || title,
+                    slug,
+                    folder,
+                    leetcodeUrl: `https://leetcode.com/problems/${slug}/`,
+                    javaFile: info.javaFile || `${folder}/${folder}.java`,
+                    readmeFile: info.readmeFile || `${folder}/README.md`,
+                    difficulty: existing?.difficulty || 'Medium',
+                    topics: existing?.topics && existing.topics.length > 0 ? existing.topics : inferTopics(slug)
+                });
+            }
+
+            newProblemsList.sort((a, b) => a.id - b.id);
+
+            // Update state & cache
+            setProblemsData(newProblemsList);
+            try {
+                localStorage.setItem(CACHE_KEY, JSON.stringify(newProblemsList));
+                localStorage.setItem(CACHE_TIME_KEY, new Date().toISOString());
+            } catch (e) {}
+
+            if (syncText) syncText.textContent = `Live Synced (${newProblemsList.length})`;
+        } catch (error) {
+            console.warn('GitHub Live Sync fallback:', error.message);
+            if (syncText) syncText.textContent = `Offline (${problems.length || 0})`;
+        } finally {
+            if (manualTrigger) {
+                setTimeout(() => {
+                    syncIcon.classList.remove('animate-spin');
+                }, 500);
+            }
+        }
+    }
+
+    function setProblemsData(data) {
+        problems = data;
+        
+        // Collect unique topics
+        uniqueTopics.clear();
+        problems.forEach(p => {
+            if (p.topics && Array.isArray(p.topics)) {
+                p.topics.forEach(t => uniqueTopics.add(t));
+            }
+        });
+
+        populateTopicDropdown();
+        applyFilters();
+    }
+
+    function populateTopicDropdown() {
+        const sortedTopics = Array.from(uniqueTopics).sort();
+        const currentSelected = topicSelect.value;
+
+        topicSelect.innerHTML = `<option value="All">All Topics & Patterns (${sortedTopics.length})</option>`;
+        sortedTopics.forEach(t => {
+            const count = problems.filter(p => p.topics && p.topics.includes(t)).length;
+            const opt = document.createElement('option');
+            opt.value = t;
+            opt.textContent = `${t} (${count})`;
+            topicSelect.appendChild(opt);
+        });
+
+        if (sortedTopics.includes(currentSelected)) {
+            topicSelect.value = currentSelected;
+        }
+    }
+
+    // --- Filtering & Sorting ---
+    function applyFilters() {
+        filteredProblems = problems.filter(p => {
+            // Search match
+            const q = currentFilter.search.toLowerCase().trim();
+            const searchMatch = !q || 
+                p.title.toLowerCase().includes(q) ||
+                p.id.toString().includes(q) ||
+                p.slug.toLowerCase().includes(q) ||
+                (p.topics && p.topics.some(t => t.toLowerCase().includes(q)));
+
+            // Difficulty match
+            const diffMatch = currentFilter.difficulty === 'All' || p.difficulty === currentFilter.difficulty;
+
+            // Topic match
+            const topicMatch = currentFilter.topic === 'All' || (p.topics && p.topics.includes(currentFilter.topic));
+
+            return searchMatch && diffMatch && topicMatch;
+        });
+
+        // Sorting
+        filteredProblems.sort((a, b) => {
+            const diffMap = { 'Easy': 1, 'Medium': 2, 'Hard': 3 };
+            switch (currentFilter.sort) {
+                case 'id-asc': return a.id - b.id;
+                case 'id-desc': return b.id - a.id;
+                case 'diff-asc': return (diffMap[a.difficulty] || 2) - (diffMap[b.difficulty] || 2);
+                case 'diff-desc': return (diffMap[b.difficulty] || 2) - (diffMap[a.difficulty] || 2);
+                case 'title-asc': return a.title.localeCompare(b.title);
+                default: return a.id - b.id;
+            }
+        });
+
+        renderStats();
+        renderTable();
+    }
+
+    // --- Rendering ---
+    function renderStats() {
+        const total = problems.length;
+        const easy = problems.filter(p => p.difficulty === 'Easy').length;
+        const medium = problems.filter(p => p.difficulty === 'Medium').length;
+        const hard = problems.filter(p => p.difficulty === 'Hard').length;
+
+        const easyPct = total > 0 ? Math.round((easy / total) * 100) : 0;
+        const mediumPct = total > 0 ? Math.round((medium / total) * 100) : 0;
+        const hardPct = total > 0 ? Math.round((hard / total) * 100) : 0;
+
+        // Calculate top 6 topics
+        const topicCounts = {};
+        problems.forEach(p => {
+            if (p.topics) {
+                p.topics.forEach(t => topicCounts[t] = (topicCounts[t] || 0) + 1);
+            }
+        });
+        const topTopics = Object.entries(topicCounts)
+            .sort((a, b) => b[1] - a[1])
+            .slice(0, 8);
+
+        if (statsCards) {
+            statsCards.innerHTML = `
+                <!-- Total Solved -->
+                <div class="stat-card cursor-pointer bg-lc-card rounded-xl p-3.5 sm:p-4 border border-slate-800/90 shadow-lg flex flex-col justify-between hover:border-slate-600 hover:bg-slate-800/40 transition-all ${currentFilter.difficulty === 'All' ? 'ring-1 ring-slate-600' : ''}" data-diff="All" title="Click to view all problems">
+                    <div class="flex items-center justify-between mb-1">
+                        <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400">Total Solved</span>
+                        <span class="p-1 rounded bg-slate-800 text-lc-cyan">
+                            <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" /></svg>
+                        </span>
+                    </div>
+                    <div class="my-1 flex items-baseline justify-between">
+                        <span class="text-2xl sm:text-3xl font-extrabold text-white font-mono tracking-tight">${total}</span>
+                        <span class="text-[10px] font-mono text-slate-400 font-semibold px-1.5 py-0.5 rounded bg-slate-800 border border-slate-700">All</span>
+                    </div>
+                    <div class="w-full bg-slate-800 rounded-full h-1.5 mt-2 overflow-hidden">
+                        <div class="bg-lc-cyan h-1.5 rounded-full" style="width: 100%"></div>
+                    </div>
+                </div>
+
+                <!-- Easy -->
+                <div class="stat-card cursor-pointer bg-lc-card rounded-xl p-3.5 sm:p-4 border border-slate-800/90 shadow-lg flex flex-col justify-between hover:border-emerald-500/40 hover:bg-slate-800/40 transition-all ${currentFilter.difficulty === 'Easy' ? 'ring-1 ring-emerald-500' : ''}" data-diff="Easy" title="Click to filter Easy problems">
+                    <div class="mb-1">
+                        <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400">Easy</span>
+                    </div>
+                    <div class="my-1 flex items-center justify-between gap-1">
+                        <span class="text-2xl sm:text-3xl font-extrabold text-lc-easy font-mono tracking-tight">${easy}</span>
+                        <span class="text-[11px] font-semibold px-2 py-0.5 rounded-md bg-emerald-500/10 text-lc-easy border border-emerald-500/25 font-mono">${easyPct}%</span>
+                    </div>
+                    <div class="w-full bg-slate-800 rounded-full h-1.5 mt-2 overflow-hidden">
+                        <div class="bg-lc-easy h-1.5 rounded-full transition-all duration-500" style="width: ${easyPct}%"></div>
+                    </div>
+                </div>
+
+                <!-- Medium -->
+                <div class="stat-card cursor-pointer bg-lc-card rounded-xl p-3.5 sm:p-4 border border-slate-800/90 shadow-lg flex flex-col justify-between hover:border-amber-500/40 hover:bg-slate-800/40 transition-all ${currentFilter.difficulty === 'Medium' ? 'ring-1 ring-amber-500' : ''}" data-diff="Medium" title="Click to filter Medium problems">
+                    <div class="mb-1">
+                        <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400">Medium</span>
+                    </div>
+                    <div class="my-1 flex items-center justify-between gap-1">
+                        <span class="text-2xl sm:text-3xl font-extrabold text-lc-medium font-mono tracking-tight">${medium}</span>
+                        <span class="text-[11px] font-semibold px-2 py-0.5 rounded-md bg-amber-500/10 text-lc-medium border border-amber-500/25 font-mono">${mediumPct}%</span>
+                    </div>
+                    <div class="w-full bg-slate-800 rounded-full h-1.5 mt-2 overflow-hidden">
+                        <div class="bg-lc-medium h-1.5 rounded-full transition-all duration-500" style="width: ${mediumPct}%"></div>
+                    </div>
+                </div>
+
+                <!-- Hard -->
+                <div class="stat-card cursor-pointer bg-lc-card rounded-xl p-3.5 sm:p-4 border border-slate-800/90 shadow-lg flex flex-col justify-between hover:border-rose-500/40 hover:bg-slate-800/40 transition-all ${currentFilter.difficulty === 'Hard' ? 'ring-1 ring-rose-500' : ''}" data-diff="Hard" title="Click to filter Hard problems">
+                    <div class="mb-1">
+                        <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400">Hard</span>
+                    </div>
+                    <div class="my-1 flex items-center justify-between gap-1">
+                        <span class="text-2xl sm:text-3xl font-extrabold text-lc-hard font-mono tracking-tight">${hard}</span>
+                        <span class="text-[11px] font-semibold px-2 py-0.5 rounded-md bg-rose-500/10 text-lc-hard border border-rose-500/25 font-mono">${hardPct}%</span>
+                    </div>
+                    <div class="w-full bg-slate-800 rounded-full h-1.5 mt-2 overflow-hidden">
+                        <div class="bg-lc-hard h-1.5 rounded-full transition-all duration-500" style="width: ${hardPct}%"></div>
+                    </div>
+                </div>
+            `;
+
+            // Add click listeners to cards
+            statsCards.querySelectorAll('.stat-card').forEach(card => {
+                card.addEventListener('click', () => {
+                    const diff = card.dataset.diff;
+                    const tabBtn = difficultyFilters.querySelector(`button[data-diff="${diff}"]`);
+                    if (tabBtn) tabBtn.click();
+                });
+            });
+        }
+
+        if (statsTopicWidget) {
+            statsTopicWidget.innerHTML = `
+                <div class="flex items-center justify-between mb-2.5">
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs font-bold uppercase tracking-wider text-slate-300">Top Problem Categories</span>
+                    </div>
+                    <span class="text-[11px] text-slate-500 font-mono">Click to Filter</span>
+                </div>
+                <div class="flex flex-wrap gap-2" id="quick-topics-container">
+                    ${topTopics.map(([name, count]) => `
+                        <button type="button" data-topic="${name}" class="quick-topic-chip inline-flex items-center gap-2 px-2.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-800/80 hover:bg-slate-700 text-slate-300 hover:text-white border border-slate-700/60 hover:border-slate-600 transition-all ${currentFilter.topic === name ? 'border-lc-cyan bg-lc-cyan/15 text-lc-cyan ring-1 ring-lc-cyan/40' : ''}">
+                            <span>${name}</span>
+                            <span class="text-[10px] px-1.5 py-0.5 rounded bg-slate-900 text-slate-300 font-mono font-bold">${count}</span>
+                        </button>
+                    `).join('')}
+                </div>
+            `;
+
+            // Add click listeners to quick topic chips
+            statsTopicWidget.querySelectorAll('.quick-topic-chip').forEach(chip => {
+                chip.addEventListener('click', () => {
+                    const topic = chip.dataset.topic;
+                    topicSelect.value = currentFilter.topic === topic ? 'All' : topic;
+                    currentFilter.topic = topicSelect.value;
+                    applyFilters();
+                });
+            });
+        }
+    }
+
+    function getDifficultyBadge(diff) {
+        if (diff === 'Easy') return '<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-500/10 text-lc-easy border border-emerald-500/30">Easy</span>';
+        if (diff === 'Medium') return '<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-amber-500/10 text-lc-medium border border-amber-500/30">Medium</span>';
+        return '<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-rose-500/10 text-lc-hard border border-rose-500/30">Hard</span>';
+    }
+
+    function renderTable() {
+        if (filteredProblems.length === 0) {
+            problemsTbody.innerHTML = '';
+            emptyState.classList.remove('hidden');
+            resultsCount.textContent = `Showing 0 of ${problems.length} problems`;
+            return;
+        }
+
+        emptyState.classList.add('hidden');
+        resultsCount.textContent = `Showing ${filteredProblems.length} of ${problems.length} problems`;
+
+        problemsTbody.innerHTML = filteredProblems.map(p => {
+            const topicsHtml = (p.topics || []).slice(0, 3).map(t => 
+                `<span class="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-medium bg-slate-800/90 text-slate-300 border border-slate-700/60">${t}</span>`
+            ).join(' ') + ((p.topics && p.topics.length > 3) ? ` <span class="text-[11px] text-slate-500">+${p.topics.length - 3}</span>` : '');
+
+            return `
+                <tr class="problem-row cursor-pointer transition-colors group" data-id="${p.id}">
+                    <td class="py-3.5 px-4 text-center font-mono text-xs font-semibold text-slate-400 group-hover:text-white">
+                        #${p.id}
+                    </td>
+                    <td class="py-3.5 px-4">
+                        <div class="flex items-center gap-2">
+                            <span class="font-semibold text-slate-100 group-hover:text-lc-cyan transition-colors">${p.title}</span>
+                            <a href="${p.leetcodeUrl}" target="_blank" onclick="event.stopPropagation()" title="Open on LeetCode" class="text-slate-500 hover:text-lc-gold transition-colors opacity-0 group-hover:opacity-100">
+                                <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
+                            </a>
+                        </div>
+                    </td>
+                    <td class="py-3.5 px-4 whitespace-nowrap">
+                        ${getDifficultyBadge(p.difficulty)}
+                    </td>
+                    <td class="py-3.5 px-4 hidden md:table-cell">
+                        <div class="flex flex-wrap gap-1 items-center">
+                            ${topicsHtml}
+                        </div>
+                    </td>
+                    <td class="py-3.5 px-4 text-right whitespace-nowrap">
+                        <button type="button" class="view-btn px-3 py-1.5 rounded-lg text-xs font-semibold text-white bg-slate-800 hover:bg-slate-700 border border-slate-700 group-hover:border-slate-600 transition-all inline-flex items-center gap-1.5">
+                            <span>Solution</span>
+                            <svg class="w-3 h-3 text-slate-400 group-hover:text-lc-cyan" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+                        </button>
+                    </td>
+                </tr>
+            `;
+        }).join('');
+
+        // Bind row click handlers
+        document.querySelectorAll('.problem-row').forEach(row => {
+            row.addEventListener('click', () => {
+                const id = parseInt(row.dataset.id, 10);
+                openModal(id);
+            });
+        });
+    }
+
+    // --- Modal Logic with Dynamic Lazy Fetching ---
+    async function openModal(id) {
+        const problem = problems.find(p => p.id === id);
+        if (!problem) return;
+
+        modalId.textContent = `#${problem.id}`;
+        modalTitle.textContent = problem.title;
+        modalDiff.innerHTML = getDifficultyBadge(problem.difficulty);
+        modalFileName.textContent = problem.javaFile ? problem.javaFile.split('/').pop() : 'Solution.java';
+        modalLeetcodeLink.href = problem.leetcodeUrl;
+        modalGithubLink.href = `https://github.com/${GITHUB_REPO}/tree/main/${problem.folder}`;
+
+        // Tags in modal footer
+        if (problem.topics && problem.topics.length > 0) {
+            modalTags.innerHTML = problem.topics.map(t => `<span class="px-2 py-0.5 rounded bg-slate-800 border border-slate-700 text-[11px] text-slate-300 font-medium">${t}</span>`).join('');
+        } else {
+            modalTags.innerHTML = '';
+        }
+
+        // Show loading state for code and description
+        modalCode.textContent = '// Fetching solution from GitHub repository...';
+        Prism.highlightElement(modalCode);
+        modalDesc.innerHTML = `<div class="animate-pulse text-xs text-slate-400 py-2">Loading problem description from repository...</div>`;
+
+        // Reset copy button
+        copyText.textContent = 'Copy Code';
+
+        // Open modal with smooth transition
+        modal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+
+        // 1. Fetch Java Code dynamically from raw GitHub
+        const rawCodeUrl = `https://raw.githubusercontent.com/${GITHUB_REPO}/main/${problem.javaFile || problem.folder + '/' + problem.folder + '.java'}`;
+        try {
+            const codeRes = await fetch(rawCodeUrl);
+            if (codeRes.ok) {
+                const code = await codeRes.text();
+                modalCode.textContent = code;
+                Prism.highlightElement(modalCode);
+            } else {
+                modalCode.textContent = `// Solution file available on GitHub:\n// https://github.com/${GITHUB_REPO}/tree/main/${problem.folder}`;
+                Prism.highlightElement(modalCode);
+            }
+        } catch (e) {
+            modalCode.textContent = `// Could not load raw file directly. View on GitHub:\n// https://github.com/${GITHUB_REPO}/tree/main/${problem.folder}`;
+            Prism.highlightElement(modalCode);
+        }
+
+        // 2. Fetch Description from README.md
+        const rawReadmeUrl = `https://raw.githubusercontent.com/${GITHUB_REPO}/main/${problem.readmeFile || problem.folder + '/README.md'}`;
+        try {
+            const readmeRes = await fetch(rawReadmeUrl);
+            if (readmeRes.ok) {
+                const html = await readmeRes.text();
+                // Strip <h2> and <h3> headers if generated by LeetHub since we show them nicely in header
+                const cleanHtml = html
+                    .replace(/<h2>.*?<\/h2>/i, '')
+                    .replace(/<h3>.*?<\/h3>/i, '')
+                    .replace(/<hr\s*\/?>/gi, '');
+                
+                modalDesc.innerHTML = cleanHtml || '<p class="text-xs text-slate-400">No additional description provided in README.</p>';
+            } else {
+                modalDesc.innerHTML = `<p class="text-xs text-slate-400">Problem statement available directly on <a href="${problem.leetcodeUrl}" target="_blank" class="text-lc-gold underline">LeetCode</a>.</p>`;
+            }
+        } catch (e) {
+            modalDesc.innerHTML = `<p class="text-xs text-slate-400">Problem statement available on <a href="${problem.leetcodeUrl}" target="_blank" class="text-lc-gold underline">LeetCode</a>.</p>`;
+        }
+    }
+
+    function closeModal() {
+        modal.classList.add('hidden');
+        document.body.style.overflow = '';
+    }
+
+    // --- Event Listeners Setup ---
+    function setupEventListeners() {
+        // Search Input
+        searchInput.addEventListener('input', (e) => {
+            currentFilter.search = e.target.value;
+            applyFilters();
+        });
+
+        // Difficulty Tab Filter
+        difficultyFilters.addEventListener('click', (e) => {
+            const btn = e.target.closest('button');
+            if (!btn) return;
+            
+            difficultyFilters.querySelectorAll('button').forEach(b => {
+                b.classList.remove('tab-active');
+                b.classList.add('text-slate-400');
+            });
+            
+            btn.classList.add('tab-active');
+            btn.classList.remove('text-slate-400');
+
+            currentFilter.difficulty = btn.dataset.diff;
+            applyFilters();
+        });
+
+        // Topic Dropdown
+        topicSelect.addEventListener('change', (e) => {
+            currentFilter.topic = e.target.value;
+            applyFilters();
+        });
+
+        // Sort Dropdown
+        sortSelect.addEventListener('change', (e) => {
+            currentFilter.sort = e.target.value;
+            applyFilters();
+        });
+
+        // Table Header Sorters
+        thId.addEventListener('click', () => {
+            currentFilter.sort = currentFilter.sort === 'id-asc' ? 'id-desc' : 'id-asc';
+            sortSelect.value = currentFilter.sort;
+            applyFilters();
+        });
+
+        thTitle.addEventListener('click', () => {
+            currentFilter.sort = currentFilter.sort === 'title-asc' ? 'id-asc' : 'title-asc';
+            sortSelect.value = currentFilter.sort;
+            applyFilters();
+        });
+
+        thDiff.addEventListener('click', () => {
+            currentFilter.sort = currentFilter.sort === 'diff-asc' ? 'diff-desc' : 'diff-asc';
+            sortSelect.value = currentFilter.sort;
+            applyFilters();
+        });
+
+        // Reset Filters Button
+        clearFiltersBtn.addEventListener('click', () => {
+            searchInput.value = '';
+            currentFilter.search = '';
+            
+            const allDiffBtn = difficultyFilters.querySelector('[data-diff="All"]');
+            if (allDiffBtn) allDiffBtn.click();
+            
+            topicSelect.value = 'All';
+            currentFilter.topic = 'All';
+            
+            sortSelect.value = 'id-asc';
+            currentFilter.sort = 'id-asc';
+            
+            applyFilters();
+        });
+
+        // Sync Button (Manual Refresh from GitHub)
+        syncBtn.addEventListener('click', () => {
+            syncWithGitHub(true);
+        });
+
+        // Modal Close Events
+        modalCloseBtn.addEventListener('click', closeModal);
+        modalBackdrop.addEventListener('click', closeModal);
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+                closeModal();
+            }
+        });
+
+        // Copy Code Button
+        copyBtn.addEventListener('click', () => {
+            const code = modalCode.textContent;
+            navigator.clipboard.writeText(code).then(() => {
+                copyText.textContent = 'Copied!';
+                setTimeout(() => {
+                    copyText.textContent = 'Copy Code';
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy!', err);
+            });
+        });
+    }
+
+    // Start App
+    init();
+}
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', startApp);
+} else {
+    startApp();
+}
+    </script>
+</body>
+</html>
