@@ -36,11 +36,11 @@ jobs:
         run: |
           git config --local user.name "github-actions[bot]"
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
-          if git status --porcelain problems.json | grep -q 'problems.json'; then
-            git add problems.json
-            git commit -m "chore(data): auto-sync problems.json from leetcode-problem-solving [skip ci]"
+          if git status --porcelain problems.json blind75.json | grep -E -q 'problems\.json|blind75\.json'; then
+            git add problems.json blind75.json
+            git commit -m "chore(data): auto-sync problems.json & blind75.json from leetcode-problem-solving [skip ci]"
             git push origin main
-            echo "Successfully updated problems.json and pushed to main."
+            echo "Successfully updated problems.json and blind75.json and pushed to main."
           else
-            echo "No new problems detected. problems.json is already up to date."
+            echo "No new changes detected. problems.json and blind75.json are already up to date."
           fi

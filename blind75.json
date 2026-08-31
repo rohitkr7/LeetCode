@@ -1,0 +1,764 @@
+[
+  {
+    "id": 1,
+    "title": "Two Sum",
+    "slug": "two-sum",
+    "category": "Array",
+    "difficulty": "Easy",
+    "leetcodeUrl": "https://leetcode.com/problems/two-sum/",
+    "isSolved": true,
+    "folder": "0001-two-sum",
+    "javaFile": "0001-two-sum/0001-two-sum.java",
+    "readmeFile": "0001-two-sum/README.md"
+  },
+  {
+    "id": 121,
+    "title": "Best Time to Buy and Sell Stock",
+    "slug": "best-time-to-buy-and-sell-stock",
+    "category": "Array",
+    "difficulty": "Easy",
+    "leetcodeUrl": "https://leetcode.com/problems/best-time-to-buy-and-sell-stock/",
+    "isSolved": true,
+    "folder": "0121-best-time-to-buy-and-sell-stock",
+    "javaFile": "0121-best-time-to-buy-and-sell-stock/0121-best-time-to-buy-and-sell-stock.java",
+    "readmeFile": "0121-best-time-to-buy-and-sell-stock/README.md"
+  },
+  {
+    "id": 217,
+    "title": "Contains Duplicate",
+    "slug": "contains-duplicate",
+    "category": "Array",
+    "difficulty": "Easy",
+    "leetcodeUrl": "https://leetcode.com/problems/contains-duplicate/",
+    "isSolved": true,
+    "folder": "0217-contains-duplicate",
+    "javaFile": "0217-contains-duplicate/0217-contains-duplicate.java",
+    "readmeFile": "0217-contains-duplicate/README.md"
+  },
+  {
+    "id": 238,
+    "title": "Product of Array Except Self",
+    "slug": "product-of-array-except-self",
+    "category": "Array",
+    "difficulty": "Medium",
+    "leetcodeUrl": "https://leetcode.com/problems/product-of-array-except-self/",
+    "isSolved": true,
+    "folder": "0238-product-of-array-except-self",
+    "javaFile": "0238-product-of-array-except-self/0238-product-of-array-except-self.java",
+    "readmeFile": "0238-product-of-array-except-self/README.md"
+  },
+  {
+    "id": 53,
+    "title": "Maximum Subarray",
+    "slug": "maximum-subarray",
+    "category": "Array",
+    "difficulty": "Medium",
+    "leetcodeUrl": "https://leetcode.com/problems/maximum-subarray/",
+    "isSolved": true,
+    "folder": "0053-maximum-subarray",
+    "javaFile": "0053-maximum-subarray/0053-maximum-subarray.java",
+    "readmeFile": "0053-maximum-subarray/README.md"
+  },
+  {
+    "id": 152,
+    "title": "Maximum Product Subarray",
+    "slug": "maximum-product-subarray",
+    "category": "Array",
+    "difficulty": "Medium",
+    "leetcodeUrl": "https://leetcode.com/problems/maximum-product-subarray/",
+    "isSolved": false
+  },
+  {
+    "id": 153,
+    "title": "Find Minimum in Rotated Sorted Array",
+    "slug": "find-minimum-in-rotated-sorted-array",
+    "category": "Array",
+    "difficulty": "Medium",
+    "leetcodeUrl": "https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/",
+    "isSolved": false
+  },
+  {
+    "id": 33,
+    "title": "Search in Rotated Sorted Array",
+    "slug": "search-in-rotated-sorted-array",
+    "category": "Array",
+    "difficulty": "Medium",
+    "leetcodeUrl": "https://leetcode.com/problems/search-in-rotated-sorted-array/",
+    "isSolved": true,
+    "folder": "0033-search-in-rotated-sorted-array",
+    "javaFile": "0033-search-in-rotated-sorted-array/0033-search-in-rotated-sorted-array.java",
+    "readmeFile": "0033-search-in-rotated-sorted-array/README.md"
+  },
+  {
+    "id": 15,
+    "title": "3Sum",
+    "slug": "3sum",
+    "category": "Array",
+    "difficulty": "Medium",
+    "leetcodeUrl": "https://leetcode.com/problems/3sum/",
+    "isSolved": false
+  },
+  {
+    "id": 11,
+    "title": "Container With Most Water",
+    "slug": "container-with-most-water",
+    "category": "Array",
+    "difficulty": "Medium",
+    "leetcodeUrl": "https://leetcode.com/problems/container-with-most-water/",
+    "isSolved": true,
+    "folder": "0011-container-with-most-water",
+    "javaFile": "0011-container-with-most-water/0011-container-with-most-water.java",
+    "readmeFile": "0011-container-with-most-water/README.md"
+  },
+  {
+    "id": 371,
+    "title": "Sum of Two Integers",
+    "slug": "sum-of-two-integers",
+    "category": "Binary",
+    "difficulty": "Medium",
+    "leetcodeUrl": "https://leetcode.com/problems/sum-of-two-integers/",
+    "isSolved": false
+  },
+  {
+    "id": 191,
+    "title": "Number of 1 Bits",
+    "slug": "number-of-1-bits",
+    "category": "Binary",
+    "difficulty": "Easy",
+    "leetcodeUrl": "https://leetcode.com/problems/number-of-1-bits/",
+    "isSolved": false
+  },
+  {
+    "id": 338,
+    "title": "Counting Bits",
+    "slug": "counting-bits",
+    "category": "Binary",
+    "difficulty": "Easy",
+    "leetcodeUrl": "https://leetcode.com/problems/counting-bits/",
+    "isSolved": false
+  },
+  {
+    "id": 268,
+    "title": "Missing Number",
+    "slug": "missing-number",
+    "category": "Binary",
+    "difficulty": "Easy",
+    "leetcodeUrl": "https://leetcode.com/problems/missing-number/",
+    "isSolved": true,
+    "folder": "0268-missing-number",
+    "javaFile": "0268-missing-number/0268-missing-number.java",
+    "readmeFile": "0268-missing-number/README.md"
+  },
+  {
+    "id": 190,
+    "title": "Reverse Bits",
+    "slug": "reverse-bits",
+    "category": "Binary",
+    "difficulty": "Easy",
+    "leetcodeUrl": "https://leetcode.com/problems/reverse-bits/",
+    "isSolved": false
+  },
+  {
+    "id": 70,
+    "title": "Climbing Stairs",
+    "slug": "climbing-stairs",
+    "category": "Dynamic Programming",
+    "difficulty": "Easy",
+    "leetcodeUrl": "https://leetcode.com/problems/climbing-stairs/",
+    "isSolved": false
+  },
+  {
+    "id": 322,
+    "title": "Coin Change",
+    "slug": "coin-change",
+    "category": "Dynamic Programming",
+    "difficulty": "Medium",
+    "leetcodeUrl": "https://leetcode.com/problems/coin-change/",
+    "isSolved": false
+  },
+  {
+    "id": 300,
+    "title": "Longest Increasing Subsequence",
+    "slug": "longest-increasing-subsequence",
+    "category": "Dynamic Programming",
+    "difficulty": "Medium",
+    "leetcodeUrl": "https://leetcode.com/problems/longest-increasing-subsequence/",
+    "isSolved": false
+  },
+  {
+    "id": 1143,
+    "title": "Longest Common Subsequence",
+    "slug": "longest-common-subsequence",
+    "category": "Dynamic Programming",
+    "difficulty": "Medium",
+    "leetcodeUrl": "https://leetcode.com/problems/longest-common-subsequence/",
+    "isSolved": false
+  },
+  {
+    "id": 139,
+    "title": "Word Break",
+    "slug": "word-break",
+    "category": "Dynamic Programming",
+    "difficulty": "Medium",
+    "leetcodeUrl": "https://leetcode.com/problems/word-break/",
+    "isSolved": false
+  },
+  {
+    "id": 377,
+    "title": "Combination Sum IV",
+    "slug": "combination-sum-iv",
+    "category": "Dynamic Programming",
+    "difficulty": "Medium",
+    "leetcodeUrl": "https://leetcode.com/problems/combination-sum-iv/",
+    "isSolved": false
+  },
+  {
+    "id": 198,
+    "title": "House Robber",
+    "slug": "house-robber",
+    "category": "Dynamic Programming",
+    "difficulty": "Medium",
+    "leetcodeUrl": "https://leetcode.com/problems/house-robber/",
+    "isSolved": false
+  },
+  {
+    "id": 213,
+    "title": "House Robber II",
+    "slug": "house-robber-ii",
+    "category": "Dynamic Programming",
+    "difficulty": "Medium",
+    "leetcodeUrl": "https://leetcode.com/problems/house-robber-ii/",
+    "isSolved": false
+  },
+  {
+    "id": 91,
+    "title": "Decode Ways",
+    "slug": "decode-ways",
+    "category": "Dynamic Programming",
+    "difficulty": "Medium",
+    "leetcodeUrl": "https://leetcode.com/problems/decode-ways/",
+    "isSolved": false
+  },
+  {
+    "id": 62,
+    "title": "Unique Paths",
+    "slug": "unique-paths",
+    "category": "Dynamic Programming",
+    "difficulty": "Medium",
+    "leetcodeUrl": "https://leetcode.com/problems/unique-paths/",
+    "isSolved": false
+  },
+  {
+    "id": 55,
+    "title": "Jump Game",
+    "slug": "jump-game",
+    "category": "Dynamic Programming",
+    "difficulty": "Medium",
+    "leetcodeUrl": "https://leetcode.com/problems/jump-game/",
+    "isSolved": false
+  },
+  {
+    "id": 133,
+    "title": "Clone Graph",
+    "slug": "clone-graph",
+    "category": "Graph",
+    "difficulty": "Medium",
+    "leetcodeUrl": "https://leetcode.com/problems/clone-graph/",
+    "isSolved": false
+  },
+  {
+    "id": 207,
+    "title": "Course Schedule",
+    "slug": "course-schedule",
+    "category": "Graph",
+    "difficulty": "Medium",
+    "leetcodeUrl": "https://leetcode.com/problems/course-schedule/",
+    "isSolved": false
+  },
+  {
+    "id": 417,
+    "title": "Pacific Atlantic Water Flow",
+    "slug": "pacific-atlantic-water-flow",
+    "category": "Graph",
+    "difficulty": "Medium",
+    "leetcodeUrl": "https://leetcode.com/problems/pacific-atlantic-water-flow/",
+    "isSolved": false
+  },
+  {
+    "id": 200,
+    "title": "Number of Islands",
+    "slug": "number-of-islands",
+    "category": "Graph",
+    "difficulty": "Medium",
+    "leetcodeUrl": "https://leetcode.com/problems/number-of-islands/",
+    "isSolved": true,
+    "folder": "0200-number-of-islands",
+    "javaFile": "0200-number-of-islands/0200-number-of-islands.java",
+    "readmeFile": "0200-number-of-islands/README.md"
+  },
+  {
+    "id": 128,
+    "title": "Longest Consecutive Sequence",
+    "slug": "longest-consecutive-sequence",
+    "category": "Graph",
+    "difficulty": "Medium",
+    "leetcodeUrl": "https://leetcode.com/problems/longest-consecutive-sequence/",
+    "isSolved": true,
+    "folder": "0128-longest-consecutive-sequence",
+    "javaFile": "0128-longest-consecutive-sequence/0128-longest-consecutive-sequence.java",
+    "readmeFile": "0128-longest-consecutive-sequence/README.md"
+  },
+  {
+    "id": 269,
+    "title": "Alien Dictionary",
+    "slug": "alien-dictionary",
+    "category": "Graph",
+    "difficulty": "Hard",
+    "leetcodeUrl": "https://leetcode.com/problems/alien-dictionary/",
+    "isSolved": false
+  },
+  {
+    "id": 261,
+    "title": "Graph Valid Tree",
+    "slug": "graph-valid-tree",
+    "category": "Graph",
+    "difficulty": "Medium",
+    "leetcodeUrl": "https://leetcode.com/problems/graph-valid-tree/",
+    "isSolved": false
+  },
+  {
+    "id": 323,
+    "title": "Number of Connected Components in an Undirected Graph",
+    "slug": "number-of-connected-components-in-an-undirected-graph",
+    "category": "Graph",
+    "difficulty": "Medium",
+    "leetcodeUrl": "https://leetcode.com/problems/number-of-connected-components-in-an-undirected-graph/",
+    "isSolved": false
+  },
+  {
+    "id": 57,
+    "title": "Insert Interval",
+    "slug": "insert-interval",
+    "category": "Interval",
+    "difficulty": "Medium",
+    "leetcodeUrl": "https://leetcode.com/problems/insert-interval/",
+    "isSolved": false
+  },
+  {
+    "id": 56,
+    "title": "Merge Intervals",
+    "slug": "merge-intervals",
+    "category": "Interval",
+    "difficulty": "Medium",
+    "leetcodeUrl": "https://leetcode.com/problems/merge-intervals/",
+    "isSolved": false
+  },
+  {
+    "id": 435,
+    "title": "Non-overlapping Intervals",
+    "slug": "non-overlapping-intervals",
+    "category": "Interval",
+    "difficulty": "Medium",
+    "leetcodeUrl": "https://leetcode.com/problems/non-overlapping-intervals/",
+    "isSolved": false
+  },
+  {
+    "id": 252,
+    "title": "Meeting Rooms",
+    "slug": "meeting-rooms",
+    "category": "Interval",
+    "difficulty": "Easy",
+    "leetcodeUrl": "https://leetcode.com/problems/meeting-rooms/",
+    "isSolved": false
+  },
+  {
+    "id": 253,
+    "title": "Meeting Rooms II",
+    "slug": "meeting-rooms-ii",
+    "category": "Interval",
+    "difficulty": "Medium",
+    "leetcodeUrl": "https://leetcode.com/problems/meeting-rooms-ii/",
+    "isSolved": false
+  },
+  {
+    "id": 206,
+    "title": "Reverse Linked List",
+    "slug": "reverse-linked-list",
+    "category": "Linked List",
+    "difficulty": "Easy",
+    "leetcodeUrl": "https://leetcode.com/problems/reverse-linked-list/",
+    "isSolved": true,
+    "folder": "0206-reverse-linked-list",
+    "javaFile": "0206-reverse-linked-list/0206-reverse-linked-list.java",
+    "readmeFile": "0206-reverse-linked-list/README.md"
+  },
+  {
+    "id": 141,
+    "title": "Linked List Cycle",
+    "slug": "linked-list-cycle",
+    "category": "Linked List",
+    "difficulty": "Easy",
+    "leetcodeUrl": "https://leetcode.com/problems/linked-list-cycle/",
+    "isSolved": true,
+    "folder": "0141-linked-list-cycle",
+    "javaFile": "0141-linked-list-cycle/0141-linked-list-cycle.java",
+    "readmeFile": "0141-linked-list-cycle/README.md"
+  },
+  {
+    "id": 21,
+    "title": "Merge Two Sorted Lists",
+    "slug": "merge-two-sorted-lists",
+    "category": "Linked List",
+    "difficulty": "Easy",
+    "leetcodeUrl": "https://leetcode.com/problems/merge-two-sorted-lists/",
+    "isSolved": true,
+    "folder": "0021-merge-two-sorted-lists",
+    "javaFile": "0021-merge-two-sorted-lists/0021-merge-two-sorted-lists.java",
+    "readmeFile": "0021-merge-two-sorted-lists/README.md"
+  },
+  {
+    "id": 23,
+    "title": "Merge k Sorted Lists",
+    "slug": "merge-k-sorted-lists",
+    "category": "Linked List",
+    "difficulty": "Hard",
+    "leetcodeUrl": "https://leetcode.com/problems/merge-k-sorted-lists/",
+    "isSolved": true,
+    "folder": "0023-merge-k-sorted-lists",
+    "javaFile": "0023-merge-k-sorted-lists/0023-merge-k-sorted-lists.java",
+    "readmeFile": "0023-merge-k-sorted-lists/README.md"
+  },
+  {
+    "id": 19,
+    "title": "Remove Nth Node From End of List",
+    "slug": "remove-nth-node-from-end-of-list",
+    "category": "Linked List",
+    "difficulty": "Medium",
+    "leetcodeUrl": "https://leetcode.com/problems/remove-nth-node-from-end-of-list/",
+    "isSolved": true,
+    "folder": "0019-remove-nth-node-from-end-of-list",
+    "javaFile": "0019-remove-nth-node-from-end-of-list/0019-remove-nth-node-from-end-of-list.java",
+    "readmeFile": "0019-remove-nth-node-from-end-of-list/README.md"
+  },
+  {
+    "id": 143,
+    "title": "Reorder List",
+    "slug": "reorder-list",
+    "category": "Linked List",
+    "difficulty": "Medium",
+    "leetcodeUrl": "https://leetcode.com/problems/reorder-list/",
+    "isSolved": false
+  },
+  {
+    "id": 73,
+    "title": "Set Matrix Zeroes",
+    "slug": "set-matrix-zeroes",
+    "category": "Matrix",
+    "difficulty": "Medium",
+    "leetcodeUrl": "https://leetcode.com/problems/set-matrix-zeroes/",
+    "isSolved": true,
+    "folder": "0073-set-matrix-zeroes",
+    "javaFile": "0073-set-matrix-zeroes/0073-set-matrix-zeroes.java",
+    "readmeFile": "0073-set-matrix-zeroes/README.md"
+  },
+  {
+    "id": 54,
+    "title": "Spiral Matrix",
+    "slug": "spiral-matrix",
+    "category": "Matrix",
+    "difficulty": "Medium",
+    "leetcodeUrl": "https://leetcode.com/problems/spiral-matrix/",
+    "isSolved": true,
+    "folder": "0054-spiral-matrix",
+    "javaFile": "0054-spiral-matrix/0054-spiral-matrix.java",
+    "readmeFile": "0054-spiral-matrix/README.md"
+  },
+  {
+    "id": 48,
+    "title": "Rotate Image",
+    "slug": "rotate-image",
+    "category": "Matrix",
+    "difficulty": "Medium",
+    "leetcodeUrl": "https://leetcode.com/problems/rotate-image/",
+    "isSolved": true,
+    "folder": "0048-rotate-image",
+    "javaFile": "0048-rotate-image/0048-rotate-image.java",
+    "readmeFile": "0048-rotate-image/README.md"
+  },
+  {
+    "id": 79,
+    "title": "Word Search",
+    "slug": "word-search",
+    "category": "Matrix",
+    "difficulty": "Medium",
+    "leetcodeUrl": "https://leetcode.com/problems/word-search/",
+    "isSolved": false
+  },
+  {
+    "id": 3,
+    "title": "Longest Substring Without Repeating Characters",
+    "slug": "longest-substring-without-repeating-characters",
+    "category": "String",
+    "difficulty": "Medium",
+    "leetcodeUrl": "https://leetcode.com/problems/longest-substring-without-repeating-characters/",
+    "isSolved": true,
+    "folder": "0003-longest-substring-without-repeating-characters",
+    "javaFile": "0003-longest-substring-without-repeating-characters/0003-longest-substring-without-repeating-characters.java",
+    "readmeFile": "0003-longest-substring-without-repeating-characters/README.md"
+  },
+  {
+    "id": 424,
+    "title": "Longest Repeating Character Replacement",
+    "slug": "longest-repeating-character-replacement",
+    "category": "String",
+    "difficulty": "Medium",
+    "leetcodeUrl": "https://leetcode.com/problems/longest-repeating-character-replacement/",
+    "isSolved": false
+  },
+  {
+    "id": 76,
+    "title": "Minimum Window Substring",
+    "slug": "minimum-window-substring",
+    "category": "String",
+    "difficulty": "Hard",
+    "leetcodeUrl": "https://leetcode.com/problems/minimum-window-substring/",
+    "isSolved": true,
+    "folder": "0076-minimum-window-substring",
+    "javaFile": "0076-minimum-window-substring/0076-minimum-window-substring.java",
+    "readmeFile": "0076-minimum-window-substring/README.md"
+  },
+  {
+    "id": 242,
+    "title": "Valid Anagram",
+    "slug": "valid-anagram",
+    "category": "String",
+    "difficulty": "Easy",
+    "leetcodeUrl": "https://leetcode.com/problems/valid-anagram/",
+    "isSolved": true,
+    "folder": "0242-valid-anagram",
+    "javaFile": "0242-valid-anagram/0242-valid-anagram.java",
+    "readmeFile": "0242-valid-anagram/README.md"
+  },
+  {
+    "id": 49,
+    "title": "Group Anagrams",
+    "slug": "group-anagrams",
+    "category": "String",
+    "difficulty": "Medium",
+    "leetcodeUrl": "https://leetcode.com/problems/group-anagrams/",
+    "isSolved": true,
+    "folder": "0049-group-anagrams",
+    "javaFile": "0049-group-anagrams/0049-group-anagrams.java",
+    "readmeFile": "0049-group-anagrams/README.md"
+  },
+  {
+    "id": 20,
+    "title": "Valid Parentheses",
+    "slug": "valid-parentheses",
+    "category": "String",
+    "difficulty": "Easy",
+    "leetcodeUrl": "https://leetcode.com/problems/valid-parentheses/",
+    "isSolved": true,
+    "folder": "0020-valid-parentheses",
+    "javaFile": "0020-valid-parentheses/0020-valid-parentheses.java",
+    "readmeFile": "0020-valid-parentheses/README.md"
+  },
+  {
+    "id": 125,
+    "title": "Valid Palindrome",
+    "slug": "valid-palindrome",
+    "category": "String",
+    "difficulty": "Easy",
+    "leetcodeUrl": "https://leetcode.com/problems/valid-palindrome/",
+    "isSolved": true,
+    "folder": "0125-valid-palindrome",
+    "javaFile": "0125-valid-palindrome/0125-valid-palindrome.java",
+    "readmeFile": "0125-valid-palindrome/README.md"
+  },
+  {
+    "id": 5,
+    "title": "Longest Palindromic Substring",
+    "slug": "longest-palindromic-substring",
+    "category": "String",
+    "difficulty": "Medium",
+    "leetcodeUrl": "https://leetcode.com/problems/longest-palindromic-substring/",
+    "isSolved": false
+  },
+  {
+    "id": 647,
+    "title": "Palindromic Substrings",
+    "slug": "palindromic-substrings",
+    "category": "String",
+    "difficulty": "Medium",
+    "leetcodeUrl": "https://leetcode.com/problems/palindromic-substrings/",
+    "isSolved": false
+  },
+  {
+    "id": 271,
+    "title": "Encode and Decode Strings",
+    "slug": "encode-and-decode-strings",
+    "category": "String",
+    "difficulty": "Medium",
+    "leetcodeUrl": "https://leetcode.com/problems/encode-and-decode-strings/",
+    "isSolved": false
+  },
+  {
+    "id": 104,
+    "title": "Maximum Depth of Binary Tree",
+    "slug": "maximum-depth-of-binary-tree",
+    "category": "Tree",
+    "difficulty": "Easy",
+    "leetcodeUrl": "https://leetcode.com/problems/maximum-depth-of-binary-tree/",
+    "isSolved": true,
+    "folder": "0104-maximum-depth-of-binary-tree",
+    "javaFile": "0104-maximum-depth-of-binary-tree/0104-maximum-depth-of-binary-tree.java",
+    "readmeFile": "0104-maximum-depth-of-binary-tree/README.md"
+  },
+  {
+    "id": 100,
+    "title": "Same Tree",
+    "slug": "same-tree",
+    "category": "Tree",
+    "difficulty": "Easy",
+    "leetcodeUrl": "https://leetcode.com/problems/same-tree/",
+    "isSolved": true,
+    "folder": "0100-same-tree",
+    "javaFile": "0100-same-tree/0100-same-tree.java",
+    "readmeFile": "0100-same-tree/README.md"
+  },
+  {
+    "id": 226,
+    "title": "Invert Binary Tree",
+    "slug": "invert-binary-tree",
+    "category": "Tree",
+    "difficulty": "Easy",
+    "leetcodeUrl": "https://leetcode.com/problems/invert-binary-tree/",
+    "isSolved": false
+  },
+  {
+    "id": 124,
+    "title": "Binary Tree Maximum Path Sum",
+    "slug": "binary-tree-maximum-path-sum",
+    "category": "Tree",
+    "difficulty": "Hard",
+    "leetcodeUrl": "https://leetcode.com/problems/binary-tree-maximum-path-sum/",
+    "isSolved": false
+  },
+  {
+    "id": 102,
+    "title": "Binary Tree Level Order Traversal",
+    "slug": "binary-tree-level-order-traversal",
+    "category": "Tree",
+    "difficulty": "Medium",
+    "leetcodeUrl": "https://leetcode.com/problems/binary-tree-level-order-traversal/",
+    "isSolved": true,
+    "folder": "0102-binary-tree-level-order-traversal",
+    "javaFile": "0102-binary-tree-level-order-traversal/0102-binary-tree-level-order-traversal.java",
+    "readmeFile": "0102-binary-tree-level-order-traversal/README.md"
+  },
+  {
+    "id": 297,
+    "title": "Serialize and Deserialize Binary Tree",
+    "slug": "serialize-and-deserialize-binary-tree",
+    "category": "Tree",
+    "difficulty": "Hard",
+    "leetcodeUrl": "https://leetcode.com/problems/serialize-and-deserialize-binary-tree/",
+    "isSolved": false
+  },
+  {
+    "id": 572,
+    "title": "Subtree of Another Tree",
+    "slug": "subtree-of-another-tree",
+    "category": "Tree",
+    "difficulty": "Easy",
+    "leetcodeUrl": "https://leetcode.com/problems/subtree-of-another-tree/",
+    "isSolved": false
+  },
+  {
+    "id": 105,
+    "title": "Construct Binary Tree from Preorder and Inorder Traversal",
+    "slug": "construct-binary-tree-from-preorder-and-inorder-traversal",
+    "category": "Tree",
+    "difficulty": "Medium",
+    "leetcodeUrl": "https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/",
+    "isSolved": false
+  },
+  {
+    "id": 98,
+    "title": "Validate Binary Search Tree",
+    "slug": "validate-binary-search-tree",
+    "category": "Tree",
+    "difficulty": "Medium",
+    "leetcodeUrl": "https://leetcode.com/problems/validate-binary-search-tree/",
+    "isSolved": false
+  },
+  {
+    "id": 230,
+    "title": "Kth Smallest Element in a BST",
+    "slug": "kth-smallest-element-in-a-bst",
+    "category": "Tree",
+    "difficulty": "Medium",
+    "leetcodeUrl": "https://leetcode.com/problems/kth-smallest-element-in-a-bst/",
+    "isSolved": true,
+    "folder": "0230-kth-smallest-element-in-a-bst",
+    "javaFile": "0230-kth-smallest-element-in-a-bst/0230-kth-smallest-element-in-a-bst.java",
+    "readmeFile": "0230-kth-smallest-element-in-a-bst/README.md"
+  },
+  {
+    "id": 235,
+    "title": "Lowest Common Ancestor of a Binary Search Tree",
+    "slug": "lowest-common-ancestor-of-a-binary-search-tree",
+    "category": "Tree",
+    "difficulty": "Medium",
+    "leetcodeUrl": "https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/",
+    "isSolved": false
+  },
+  {
+    "id": 208,
+    "title": "Implement Trie (Prefix Tree)",
+    "slug": "implement-trie-prefix-tree",
+    "category": "Tree",
+    "difficulty": "Medium",
+    "leetcodeUrl": "https://leetcode.com/problems/implement-trie-prefix-tree/",
+    "isSolved": false
+  },
+  {
+    "id": 211,
+    "title": "Design Add and Search Words Data Structure",
+    "slug": "design-add-and-search-words-data-structure",
+    "category": "Tree",
+    "difficulty": "Medium",
+    "leetcodeUrl": "https://leetcode.com/problems/design-add-and-search-words-data-structure/",
+    "isSolved": false
+  },
+  {
+    "id": 212,
+    "title": "Word Search II",
+    "slug": "word-search-ii",
+    "category": "Tree",
+    "difficulty": "Hard",
+    "leetcodeUrl": "https://leetcode.com/problems/word-search-ii/",
+    "isSolved": false
+  },
+  {
+    "id": 347,
+    "title": "Top K Frequent Elements",
+    "slug": "top-k-frequent-elements",
+    "category": "Heap",
+    "difficulty": "Medium",
+    "leetcodeUrl": "https://leetcode.com/problems/top-k-frequent-elements/",
+    "isSolved": true,
+    "folder": "0347-top-k-frequent-elements",
+    "javaFile": "0347-top-k-frequent-elements/0347-top-k-frequent-elements.java",
+    "readmeFile": "0347-top-k-frequent-elements/README.md"
+  },
+  {
+    "id": 295,
+    "title": "Find Median from Data Stream",
+    "slug": "find-median-from-data-stream",
+    "category": "Heap",
+    "difficulty": "Hard",
+    "leetcodeUrl": "https://leetcode.com/problems/find-median-from-data-stream/",
+    "isSolved": false
+  }
+]

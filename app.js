@@ -2,6 +2,7 @@
 function startApp() {
     // --- State ---
     let problems = [];
+    let blind75 = [];
     let filteredProblems = [];
     let currentFilter = {
         search: '',
@@ -10,14 +11,9 @@ function startApp() {
         sort: 'id-asc'
     };
     let uniqueTopics = new Set();
-    const CACHE_KEY = 'lc_viewer_problems_cache_v3';
-    const CACHE_TIME_KEY = 'lc_viewer_cache_timestamp_v3';
+    const CACHE_KEY = 'lc_viewer_problems_cache_v5';
+    const CACHE_TIME_KEY = 'lc_viewer_cache_timestamp_v5';
     const GITHUB_REPO = 'rohitkr7/leetcode-problem-solving';
-
-    // Purge any legacy caches
-    try {
-        localStorage.clear();
-    } catch (e) {}
 
     // --- DOM Elements ---
     const statsCards = document.getElementById('stats-cards');
@@ -60,6 +56,32 @@ function startApp() {
     const copyText = document.getElementById('copy-text');
     let isWordWrap = localStorage.getItem('lc_viewer_word_wrap') === 'true';
     let currentRawCode = '';
+
+    // --- Topic Classification Rules for Newly Added Problems ---
+    const topicRules = [
+        { topic: 'Linked List', regex: /linked-list|node|merge-two-sorted-lists|add-two-numbers|swap-nodes|reverse-linked/i },
+        { topic: 'Tree / BST', regex: /tree|bst|binary-tree|level-order|traversal|lca|lowest-common-ancestor|inorder|preorder|postorder/i },
+        { topic: 'Graph / DFS / BFS', regex: /graph|island|course-schedule|clone-graph|surrounded|pacific-atlantic|word-search|n-queens/i },
+        { topic: 'Dynamic Programming', regex: /dynamic-programming|climbing-stairs|house-robber|coin-change|longest-increasing|longest-common|word-break|edit-distance|minimum-path-sum/i },
+        { topic: 'Two Pointers', regex: /two-pointers|two-sum|3sum|container-with-most-water|trapping-rain-water|valid-palindrome|remove-duplicates|sort-colors/i },
+        { topic: 'Sliding Window', regex: /sliding-window|longest-substring|minimum-window|permutation-in-string|maximum-average/i },
+        { topic: 'Stack', regex: /stack|valid-parentheses|daily-temperatures|min-stack|evaluate-reverse-polish|generate-parentheses/i },
+        { topic: 'Binary Search', regex: /binary-search|search-in-rotated|find-minimum|search-a-2d-matrix|koko|median-of-two/i },
+        { topic: 'Array & Matrix', regex: /array|matrix|rotate-image|spiral-matrix|set-matrix|product-of-array|contains-duplicate|majority-element|maximum-subarray|pascals-triangle/i },
+        { topic: 'String', regex: /string|anagram|palindrome|parentheses|roman|integer-to-roman|longest-common-prefix/i },
+        { topic: 'Backtracking', regex: /backtracking|subsets|permutations|combination-sum|n-queens|generate-parentheses/i }
+    ];
+
+    function inferTopics(slug) {
+        const matched = [];
+        const lower = slug.toLowerCase();
+        for (const rule of topicRules) {
+            if (rule.regex.test(lower)) {
+                matched.push(rule.topic);
+            }
+        }
+        return matched.length > 0 ? matched : ['Algorithms'];
+    }
 
     function renderCodeContent(rawCode) {
         currentRawCode = rawCode || '';
@@ -106,37 +128,19 @@ function startApp() {
         }
     }
 
-    // --- Topic Classification Rules for Newly Added Problems ---
-    const topicRules = [
-        { topic: 'Linked List', regex: /linked-list|node|merge-two-sorted-lists|add-two-numbers|swap-nodes|reverse-linked/i },
-        { topic: 'Tree / BST', regex: /tree|bst|binary-tree|level-order|traversal|lca|lowest-common-ancestor|inorder|preorder|postorder/i },
-        { topic: 'Graph / DFS / BFS', regex: /graph|island|course-schedule|clone-graph|surrounded|pacific-atlantic|word-search|n-queens/i },
-        { topic: 'Dynamic Programming', regex: /dynamic-programming|climbing-stairs|house-robber|coin-change|longest-increasing|longest-common|word-break|edit-distance|minimum-path-sum/i },
-        { topic: 'Two Pointers', regex: /two-pointers|two-sum|3sum|container-with-most-water|trapping-rain-water|valid-palindrome|remove-duplicates|sort-colors/i },
-        { topic: 'Sliding Window', regex: /sliding-window|longest-substring|minimum-window|permutation-in-string|maximum-average/i },
-        { topic: 'Stack', regex: /stack|valid-parentheses|daily-temperatures|min-stack|evaluate-reverse-polish|generate-parentheses/i },
-        { topic: 'Binary Search', regex: /binary-search|search-in-rotated|find-minimum|search-a-2d-matrix|koko|median-of-two/i },
-        { topic: 'Array & Matrix', regex: /array|matrix|rotate-image|spiral-matrix|set-matrix|product-of-array|contains-duplicate|majority-element|maximum-subarray|pascals-triangle/i },
-        { topic: 'String', regex: /string|anagram|palindrome|parentheses|roman|integer-to-roman|longest-common-prefix/i },
-        { topic: 'Backtracking', regex: /backtracking|subsets|permutations|combination-sum|n-queens|generate-parentheses/i }
-    ];
-
-    function inferTopics(slug) {
-        const matched = [];
-        const lower = slug.toLowerCase();
-        for (const rule of topicRules) {
-            if (rule.regex.test(lower)) {
-                matched.push(rule.topic);
-            }
-        }
-        return matched.length > 0 ? matched : ['Algorithms'];
-    }
-
     // --- Initialization & Data Fetching ---
     async function init() {
         setupEventListeners();
 
-        // 1. Always load baseline bundled problems.json first for guaranteed data integrity
+        // 1. Fetch blind75 list
+        try {
+            const b75Res = await fetch('blind75.json');
+            if (b75Res.ok) {
+                blind75 = await b75Res.json();
+            }
+        } catch (e) {}
+
+        // 2. Always load baseline bundled problems.json first
         let loadedFromSeed = false;
         try {
             const res = await fetch('problems.json');
@@ -151,7 +155,7 @@ function startApp() {
             console.warn('Local problems.json fetch fallback:', e);
         }
 
-        // Fallback to cache if offline / offline file fetch failed
+        // Fallback to cache if offline
         if (!loadedFromSeed) {
             try {
                 const rawCache = localStorage.getItem(CACHE_KEY);
@@ -164,7 +168,7 @@ function startApp() {
             } catch (e) {}
         }
 
-        // 2. Synchronize dynamically with GitHub Git Trees API in background
+        // 3. Synchronize dynamically with GitHub Git Trees API in background
         syncWithGitHub(false);
     }
 
@@ -205,6 +209,7 @@ function startApp() {
 
             // Existing problem map for preserving difficulty and topics if already known
             const existingMap = new Map(problems.map(p => [p.id, p]));
+            const blindMap = new Map(blind75.map(p => [p.id, p]));
 
             const newProblemsList = [];
             for (const [folder, info] of folderMap.entries()) {
@@ -215,16 +220,20 @@ function startApp() {
                 const title = slug.split('-').map(s => s.charAt(0).toUpperCase() + s.slice(1)).join(' ');
                 
                 const existing = existingMap.get(id);
+                const isBlind = blindMap.has(id);
+                const blindInfo = blindMap.get(id);
+
                 newProblemsList.push({
                     id,
-                    title: existing?.title || title,
+                    title: existing?.title || blindInfo?.title || title,
                     slug,
                     folder,
                     leetcodeUrl: `https://leetcode.com/problems/${slug}/`,
                     javaFile: info.javaFile || `${folder}/${folder}.java`,
                     readmeFile: info.readmeFile || `${folder}/README.md`,
-                    difficulty: existing?.difficulty || 'Medium',
-                    topics: existing?.topics && existing.topics.length > 0 ? existing.topics : inferTopics(slug)
+                    difficulty: existing?.difficulty || blindInfo?.difficulty || 'Medium',
+                    topics: existing?.topics && existing.topics.length > 0 ? existing.topics : inferTopics(slug),
+                    isBlind75: isBlind
                 });
             }
 
@@ -268,8 +277,13 @@ function startApp() {
     function populateTopicDropdown() {
         const sortedTopics = Array.from(uniqueTopics).sort();
         const currentSelected = topicSelect.value;
+        const solvedBlindCount = problems.filter(p => p.isBlind75).length;
 
-        topicSelect.innerHTML = `<option value="All">All Topics & Patterns (${sortedTopics.length})</option>`;
+        topicSelect.innerHTML = `
+            <option value="All">All Topics & Patterns (${sortedTopics.length})</option>
+            <option value="Blind 75">🎯 Blind 75 (${solvedBlindCount})</option>
+        `;
+
         sortedTopics.forEach(t => {
             const count = problems.filter(p => p.topics && p.topics.includes(t)).length;
             const opt = document.createElement('option');
@@ -278,8 +292,10 @@ function startApp() {
             topicSelect.appendChild(opt);
         });
 
-        if (sortedTopics.includes(currentSelected)) {
+        if (sortedTopics.includes(currentSelected) || currentSelected === 'Blind 75') {
             topicSelect.value = currentSelected;
+        } else {
+            topicSelect.value = 'All';
         }
     }
 
@@ -297,8 +313,13 @@ function startApp() {
             // Difficulty match
             const diffMatch = currentFilter.difficulty === 'All' || p.difficulty === currentFilter.difficulty;
 
-            // Topic match
-            const topicMatch = currentFilter.topic === 'All' || (p.topics && p.topics.includes(currentFilter.topic));
+            // Topic / Blind 75 match
+            let topicMatch = true;
+            if (currentFilter.topic === 'Blind 75') {
+                topicMatch = Boolean(p.isBlind75);
+            } else if (currentFilter.topic !== 'All') {
+                topicMatch = Boolean(p.topics && p.topics.includes(currentFilter.topic));
+            }
 
             return searchMatch && diffMatch && topicMatch;
         });
@@ -326,12 +347,13 @@ function startApp() {
         const easy = problems.filter(p => p.difficulty === 'Easy').length;
         const medium = problems.filter(p => p.difficulty === 'Medium').length;
         const hard = problems.filter(p => p.difficulty === 'Hard').length;
+        const solvedBlindCount = problems.filter(p => p.isBlind75).length;
 
         const easyPct = total > 0 ? Math.round((easy / total) * 100) : 0;
         const mediumPct = total > 0 ? Math.round((medium / total) * 100) : 0;
         const hardPct = total > 0 ? Math.round((hard / total) * 100) : 0;
 
-        // Calculate top 6 topics
+        // Calculate top topics
         const topicCounts = {};
         problems.forEach(p => {
             if (p.topics) {
@@ -340,12 +362,12 @@ function startApp() {
         });
         const topTopics = Object.entries(topicCounts)
             .sort((a, b) => b[1] - a[1])
-            .slice(0, 8);
+            .slice(0, 7);
 
         if (statsCards) {
             statsCards.innerHTML = `
                 <!-- Total Solved -->
-                <div class="stat-card cursor-pointer bg-lc-card rounded-xl p-3.5 sm:p-4 border border-slate-800/90 shadow-lg flex flex-col justify-between hover:border-slate-600 hover:bg-slate-800/40 transition-all ${currentFilter.difficulty === 'All' ? 'ring-1 ring-slate-600' : ''}" data-diff="All" title="Click to view all problems">
+                <div class="stat-card cursor-pointer bg-lc-card rounded-xl p-3.5 sm:p-4 border border-slate-800/90 shadow-lg flex flex-col justify-between hover:border-slate-600 hover:bg-slate-800/40 transition-all ${currentFilter.difficulty === 'All' && currentFilter.topic === 'All' ? 'ring-1 ring-slate-600' : ''}" data-diff="All" title="Click to view all problems">
                     <div class="flex items-center justify-between mb-1">
                         <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400">Total Solved</span>
                         <span class="p-1 rounded bg-slate-800 text-lc-cyan">
@@ -404,7 +426,6 @@ function startApp() {
                 </div>
             `;
 
-            // Add click listeners to cards
             statsCards.querySelectorAll('.stat-card').forEach(card => {
                 card.addEventListener('click', () => {
                     const diff = card.dataset.diff;
@@ -415,6 +436,8 @@ function startApp() {
         }
 
         if (statsTopicWidget) {
+            const isBlindSelected = currentFilter.topic === 'Blind 75';
+
             statsTopicWidget.innerHTML = `
                 <div class="flex items-center justify-between mb-2.5">
                     <div class="flex items-center gap-2">
@@ -423,6 +446,12 @@ function startApp() {
                     <span class="text-[11px] text-slate-500 font-mono">Click to Filter</span>
                 </div>
                 <div class="flex flex-wrap gap-2" id="quick-topics-container">
+                    <!-- Blind 75 Special Filter Chip -->
+                    <button type="button" data-topic="Blind 75" class="quick-topic-chip inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-bold transition-all ${isBlindSelected ? 'border-amber-400 bg-amber-500/20 text-amber-300 ring-1 ring-amber-400/50' : 'bg-slate-800 hover:bg-slate-700 text-amber-300 border border-amber-500/40 hover:border-amber-400'}">
+                        <span>🎯 Blind 75</span>
+                        <span class="text-[10px] px-1.5 py-0.5 rounded bg-slate-900 text-amber-300 font-mono font-bold">${solvedBlindCount}</span>
+                    </button>
+
                     ${topTopics.map(([name, count]) => `
                         <button type="button" data-topic="${name}" class="quick-topic-chip inline-flex items-center gap-2 px-2.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-800/80 hover:bg-slate-700 text-slate-300 hover:text-white border border-slate-700/60 hover:border-slate-600 transition-all ${currentFilter.topic === name ? 'border-lc-cyan bg-lc-cyan/15 text-lc-cyan ring-1 ring-lc-cyan/40' : ''}">
                             <span>${name}</span>
@@ -459,21 +488,26 @@ function startApp() {
         }
 
         emptyState.classList.add('hidden');
-        resultsCount.textContent = `Showing ${filteredProblems.length} of ${problems.length} problems`;
+        resultsCount.textContent = `Showing ${filteredProblems.length} of ${problems.length} problems ${currentFilter.topic === 'Blind 75' ? '(Blind 75 Filtered)' : ''}`;
 
         problemsTbody.innerHTML = filteredProblems.map(p => {
+            const blindBadge = p.isBlind75 
+                ? `<span class="inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[10px] font-bold bg-amber-500/15 text-amber-300 border border-amber-500/30 shrink-0">🎯 Blind 75</span>` 
+                : '';
+
             const topicsHtml = (p.topics || []).slice(0, 3).map(t => 
                 `<span class="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-medium bg-slate-800/90 text-slate-300 border border-slate-700/60">${t}</span>`
             ).join(' ') + ((p.topics && p.topics.length > 3) ? ` <span class="text-[11px] text-slate-500">+${p.topics.length - 3}</span>` : '');
 
             return `
-                <tr class="problem-row cursor-pointer transition-colors group" data-id="${p.id}">
+                <tr class="problem-row cursor-pointer transition-colors group hover:bg-slate-800/60" data-id="${p.id}">
                     <td class="py-3 px-2.5 sm:px-4 text-center font-mono text-xs font-semibold text-slate-400 group-hover:text-white">
                         #${p.id}
                     </td>
                     <td class="py-3 px-2 sm:px-4 min-w-0">
-                        <div class="flex items-center gap-1.5 sm:gap-2">
+                        <div class="flex items-center gap-1.5 sm:gap-2 flex-wrap">
                             <span class="font-semibold text-slate-100 group-hover:text-lc-cyan transition-colors text-xs sm:text-sm break-words">${p.title}</span>
+                            ${blindBadge}
                             <a href="${p.leetcodeUrl}" target="_blank" onclick="event.stopPropagation()" title="Open on LeetCode" class="shrink-0 text-slate-500 hover:text-lc-gold transition-colors opacity-70 sm:opacity-0 sm:group-hover:opacity-100">
                                 <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
                             </a>
@@ -519,11 +553,14 @@ function startApp() {
         modalGithubLink.href = `https://github.com/${GITHUB_REPO}/tree/main/${problem.folder}`;
 
         // Tags in modal footer
-        if (problem.topics && problem.topics.length > 0) {
-            modalTags.innerHTML = problem.topics.map(t => `<span class="px-2 py-0.5 rounded bg-slate-800 border border-slate-700 text-[11px] text-slate-300 font-medium">${t}</span>`).join('');
-        } else {
-            modalTags.innerHTML = '';
+        let tagsHtml = '';
+        if (problem.isBlind75) {
+            tagsHtml += `<span class="px-2 py-0.5 rounded bg-slate-800 border border-slate-700 text-[11px] text-amber-300 font-semibold">🎯 Blind 75</span>`;
         }
+        if (problem.topics && problem.topics.length > 0) {
+            tagsHtml += problem.topics.map(t => `<span class="px-2 py-0.5 rounded bg-slate-800 border border-slate-700 text-[11px] text-slate-300 font-medium">${t}</span>`).join('');
+        }
+        modalTags.innerHTML = tagsHtml;
 
         // Show loading state for code and description
         renderCodeContent('// Fetching solution from GitHub repository...');
@@ -532,7 +569,7 @@ function startApp() {
         // Reset copy button
         copyText.textContent = 'Copy Code';
 
-        // Open modal with smooth transition
+        // Open modal
         modal.classList.remove('hidden');
         document.body.style.overflow = 'hidden';
         updateWordWrapUI();
@@ -557,7 +594,6 @@ function startApp() {
             const readmeRes = await fetch(rawReadmeUrl);
             if (readmeRes.ok) {
                 const html = await readmeRes.text();
-                // Strip <h2> and <h3> headers if generated by LeetHub since we show them nicely in header
                 const cleanHtml = html
                     .replace(/<h2>.*?<\/h2>/i, '')
                     .replace(/<h3>.*?<\/h3>/i, '')

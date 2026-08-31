@@ -3,6 +3,7 @@ const path = require('path');
 
 const GITHUB_REPO = 'rohitkr7/leetcode-problem-solving';
 const PROBLEMS_FILE = path.join(__dirname, '..', 'problems.json');
+const BLIND75_FILE = path.join(__dirname, '..', 'blind75.json');
 
 const topicRules = [
     { topic: 'Linked List', regex: /linked-list|node|merge-two-sorted-lists|add-two-numbers|swap-nodes|reverse-linked/i },
@@ -61,7 +62,18 @@ async function sync() {
     }
     const existingMap = new Map(existingProblems.map(p => [p.id, p]));
 
-    // Parse folder structure
+    // Load blind75.json
+    let blind75List = [];
+    if (fs.existsSync(BLIND75_FILE)) {
+        try {
+            blind75List = JSON.parse(fs.readFileSync(BLIND75_FILE, 'utf8'));
+        } catch (e) {
+            console.warn('Could not parse existing blind75.json:', e.message);
+        }
+    }
+    const blind75Map = new Map(blind75List.map(p => [p.id, p]));
+
+    // Parse folder structure from GitHub Tree
     const folderMap = new Map();
     data.tree.forEach(item => {
         const parts = item.path.split('/');
@@ -80,31 +92,55 @@ async function sync() {
     });
 
     const updatedList = [];
+    const solvedIds = new Set();
+
     for (const [folder, info] of folderMap.entries()) {
         const match = folder.match(/^(\d{4})-(.+)$/);
         if (!match) continue;
         const id = parseInt(match[1], 10);
+        solvedIds.add(id);
         const slug = match[2];
         const title = slug.split('-').map(s => s.charAt(0).toUpperCase() + s.slice(1)).join(' ');
 
         const existing = existingMap.get(id);
+        const isBlind = blind75Map.has(id);
+        const blindInfo = blind75Map.get(id);
+
         updatedList.push({
             id,
-            title: existing?.title || title,
+            title: existing?.title || blindInfo?.title || title,
             slug,
             folder,
             leetcodeUrl: `https://leetcode.com/problems/${slug}/`,
             javaFile: info.javaFile || `${folder}/${folder}.java`,
             readmeFile: info.readmeFile || `${folder}/README.md`,
-            difficulty: existing?.difficulty || 'Medium',
-            topics: existing?.topics && existing.topics.length > 0 ? existing.topics : inferTopics(slug)
+            difficulty: existing?.difficulty || blindInfo?.difficulty || 'Medium',
+            topics: existing?.topics && existing.topics.length > 0 ? existing.topics : inferTopics(slug),
+            isBlind75: isBlind
         });
     }
 
     updatedList.sort((a, b) => a.id - b.id);
 
+    // Update blind75.json solved status
+    const updatedBlind75 = blind75List.map(item => {
+        const isSolved = solvedIds.has(item.id);
+        const solvedItem = updatedList.find(p => p.id === item.id);
+        return {
+            ...item,
+            isSolved,
+            folder: isSolved ? solvedItem?.folder : undefined,
+            javaFile: isSolved ? solvedItem?.javaFile : undefined,
+            readmeFile: isSolved ? solvedItem?.readmeFile : undefined
+        };
+    });
+
     fs.writeFileSync(PROBLEMS_FILE, JSON.stringify(updatedList, null, 2), 'utf8');
+    fs.writeFileSync(BLIND75_FILE, JSON.stringify(updatedBlind75, null, 2), 'utf8');
+    
+    const solvedBlindCount = updatedBlind75.filter(p => p.isSolved).length;
     console.log(`Successfully synced ${updatedList.length} problems to problems.json.`);
+    console.log(`Blind 75 status: ${solvedBlindCount} / ${updatedBlind75.length} solved.`);
 }
 
 sync().catch(err => {

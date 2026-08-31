@@ -1,0 +1,1106 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>Blind 75 Tracker — LeetCode Java Solutions</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23FFA116'><path d='M13.483 0a1.374 1.374 0 0 0-.961.438L7.116 6.226l-3.854 4.126a5.266 5.266 0 0 0-1.209 2.104 5.35 5.35 0 0 0-.125.513 5.527 5.527 0 0 0 .062 2.362 5.83 5.83 0 0 0 .349 1.017 5.939 5.939 0 0 0 1.271 1.541l11.967 11.695a1.374 1.374 0 0 0 1.954 0 1.374 1.374 0 0 0 0-1.954l-11.968-11.695a3.21 3.21 0 0 1-.685-.828 3.125 3.125 0 0 1-.365-1.127 3.09 3.09 0 0 1 .054-1.246 3.064 3.064 0 0 1 .521-1.109l3.854-4.126 5.406-5.788a1.374 1.374 0 0 0-.91-2.327h-.001zM20.518 14.1a1.374 1.374 0 0 0-.961.438l-2.484 2.659a1.374 1.374 0 0 0 .041 1.944l.036.035a1.374 1.374 0 0 0 1.908-.04l2.485-2.659a1.374 1.374 0 0 0-.041-1.944l-.036-.035a1.374 1.374 0 0 0-.948-.398z'/></svg>">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'Inter', 'sans-serif'],
+                        mono: ['"Fira Code"', 'monospace'],
+                    },
+                    colors: {
+                        lc: {
+                            bg: '#0B1120',
+                            card: '#131D33',
+                            surface: '#1E293B',
+                            hover: '#22304A',
+                            gold: '#FFA116',
+                            cyan: '#38BDF8',
+                            easy: '#00B8A3',
+                            medium: '#FFC01E',
+                            hard: '#FF375F',
+                            border: '#1E293B'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Prism.js for Syntax Highlighting -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet" />
+
+    <style>
+        html, body {
+            overflow-x: hidden;
+            width: 100%;
+            position: relative;
+        }
+
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0B1120;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1E293B;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #334155;
+        }
+        
+        pre[class*="language-"] {
+            margin: 0;
+            padding: 0.75rem 0 !important;
+            border-radius: 0.75rem;
+            background: #0d1322 !important;
+            font-size: 0.8rem;
+            max-width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            line-height: 1.5;
+        }
+
+        .code-line {
+            display: flex;
+            align-items: flex-start;
+            min-height: 1.5rem;
+            line-height: 1.5;
+            padding: 0 0.5rem 0 0;
+        }
+
+        .code-line:hover {
+            background-color: rgba(255, 255, 255, 0.03);
+        }
+
+        .code-line-num {
+            width: 3.2rem;
+            min-width: 3.2rem;
+            padding-right: 1.1rem;
+            text-align: right;
+            color: #475569;
+            user-select: none;
+            font-family: "Fira Code", monospace;
+            font-size: 0.775rem;
+            flex-shrink: 0;
+            line-height: 1.5;
+        }
+
+        .code-line-content {
+            flex: 1;
+            min-width: 0;
+            white-space: pre;
+            font-family: "Fira Code", monospace;
+            font-size: 0.8rem;
+            line-height: 1.5;
+        }
+
+        .code-wrapped .code-line-content {
+            white-space: pre-wrap !important;
+            word-break: break-word !important;
+            overflow-wrap: anywhere !important;
+        }
+
+        .tab-active {
+            background-color: #FFA116 !important;
+            color: #0F172A !important;
+            font-weight: 700 !important;
+        }
+
+        .problem-row:hover {
+            background-color: rgba(30, 41, 59, 0.65);
+        }
+
+        .problem-description {
+            word-break: break-word;
+            overflow-wrap: break-word;
+            max-width: 100%;
+        }
+
+        .problem-description h2, .problem-description h3, .problem-description h4 {
+            display: none;
+        }
+        .problem-description hr {
+            display: none;
+        }
+        .problem-description code {
+            background: #1e293b;
+            padding: 0.15rem 0.35rem;
+            border-radius: 0.25rem;
+            font-family: "Fira Code", monospace;
+            font-size: 0.85em;
+            color: #38bdf8;
+            word-break: break-word;
+        }
+        .problem-description pre {
+            background: #0f172a !important;
+            border: 1px solid #334155;
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            margin: 0.75rem 0;
+            max-width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            white-space: pre-wrap;
+            word-break: break-word;
+            font-size: 0.8rem;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body class="bg-lc-bg text-slate-200 font-sans antialiased min-h-screen flex flex-col selection:bg-lc-gold/30 selection:text-white overflow-x-hidden">
+
+    <!-- Header -->
+    <header class="sticky top-0 z-40 w-full backdrop-blur-md bg-slate-950/90 border-b border-slate-800/80 py-3 sm:py-3.5">
+        <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between gap-2 sm:gap-4">
+                <!-- Logo & Branding -->
+                <div class="flex items-center gap-2 sm:gap-3 min-w-0">
+                    <div class="w-8 h-8 shrink-0 rounded-lg bg-gradient-to-tr from-amber-500 to-amber-600 border border-amber-400 flex items-center justify-center text-slate-950 shadow-md shadow-amber-500/20">
+                        <span class="text-base font-extrabold">🎯</span>
+                    </div>
+                    <div class="min-w-0">
+                        <div class="flex items-center gap-1.5 sm:gap-2">
+                            <h1 class="text-sm sm:text-base md:text-lg font-bold tracking-tight text-white truncate">Blind 75 Tracker</h1>
+                            <span class="text-[10px] sm:text-[11px] font-semibold px-1.5 sm:px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 border border-amber-500/40 font-mono">Curated 75</span>
+                        </div>
+                        <p class="text-xs text-slate-400 hidden sm:block">Automated Progress Tracker &bull; Java Solutions</p>
+                    </div>
+                </div>
+
+                <!-- Navigation Tabs & External Links -->
+                <div class="flex items-center gap-2 sm:gap-3 shrink-0">
+                    <!-- Primary Nav Links -->
+                    <div class="flex items-center bg-slate-900 rounded-lg p-1 border border-slate-800">
+                        <a href="index.html" class="flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-semibold text-slate-400 hover:text-white hover:bg-slate-800 transition-all">
+                            <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16" /></svg>
+                            <span class="hidden sm:inline">All Solutions</span>
+                        </a>
+                        <a href="blind75.html" class="flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-bold bg-amber-500 text-slate-950 shadow-sm transition-all">
+                            <span>🎯</span>
+                            <span>Blind 75</span>
+                        </a>
+                    </div>
+
+                    <!-- Live Sync Indicator -->
+                    <button id="sync-btn" title="Click to sync newly added problems from GitHub" class="flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-700/80 transition-all shadow-sm">
+                        <span id="sync-indicator" class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shrink-0"></span>
+                        <span id="sync-text" class="hidden sm:inline font-mono">Live Synced</span>
+                        <svg id="sync-icon" class="w-3.5 h-3.5 text-slate-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                        </svg>
+                    </button>
+
+                    <a href="https://github.com/rohitkr7/leetcode-problem-solving" target="_blank" class="flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-white border border-slate-700/80 transition-colors text-xs font-semibold" title="View GitHub Repository">
+                        <svg class="w-4 h-4 shrink-0" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd"/></svg>
+                        <span class="hidden sm:inline">GitHub</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="flex-grow max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-5 sm:py-6 w-full space-y-5 sm:space-y-6">
+        
+        <!-- Hero Progress Banner & Stats -->
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-3 sm:gap-4" id="stats-container">
+            <!-- Left 4 Cards: Overall Progress + Difficulties (7 cols on md+) -->
+            <div class="md:col-span-7 grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3" id="stats-cards">
+                <div class="bg-lc-card rounded-xl p-4 border border-slate-800 animate-pulse h-28"></div>
+                <div class="bg-lc-card rounded-xl p-4 border border-slate-800 animate-pulse h-28"></div>
+                <div class="bg-lc-card rounded-xl p-4 border border-slate-800 animate-pulse h-28"></div>
+                <div class="bg-lc-card rounded-xl p-4 border border-slate-800 animate-pulse h-28"></div>
+            </div>
+
+            <!-- Right Widget: 10 Category Progress Grid (5 cols on md+) -->
+            <div class="md:col-span-5 bg-lc-card rounded-xl p-3.5 sm:p-4 border border-slate-800/90 shadow-lg flex flex-col justify-between" id="stats-topic-widget">
+                <div class="animate-pulse h-24 bg-slate-800/50 rounded-lg"></div>
+            </div>
+        </div>
+
+        <!-- Controls & Filter Bar -->
+        <div class="bg-lc-card rounded-xl p-3 sm:p-4 border border-slate-800/90 shadow-xl flex flex-col lg:flex-row gap-3 items-stretch lg:items-center justify-between">
+            <!-- Search Input -->
+            <div class="relative flex-1 min-w-0">
+                <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                    <svg class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
+                    </svg>
+                </div>
+                <input type="text" id="search-input" class="block w-full pl-10 pr-4 py-2 text-sm border border-slate-700/80 rounded-lg bg-slate-900 text-slate-200 placeholder-slate-400 focus:outline-none focus:ring-1 focus:ring-amber-400 focus:border-amber-400 transition-all" placeholder="Search Blind 75 by #, title, category, or keyword...">
+            </div>
+
+            <!-- Filters Group -->
+            <div class="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-2 sm:gap-2.5">
+                <!-- Status Filter (All / Solved / Unsolved) -->
+                <div class="flex rounded-lg p-1 bg-slate-900 border border-slate-700/80 justify-between" id="status-filters">
+                    <button type="button" data-status="All" class="status-btn tab-active flex-1 sm:flex-initial px-3 py-1.5 text-xs font-semibold rounded-md transition-all text-center">All (75)</button>
+                    <button type="button" data-status="Solved" class="status-btn text-slate-400 hover:text-lc-easy flex-1 sm:flex-initial px-3 py-1.5 text-xs font-semibold rounded-md transition-all text-center">Solved</button>
+                    <button type="button" data-status="Unsolved" class="status-btn text-slate-400 hover:text-amber-400 flex-1 sm:flex-initial px-3 py-1.5 text-xs font-semibold rounded-md transition-all text-center">Unsolved</button>
+                </div>
+
+                <!-- Difficulty Segmented Control -->
+                <div class="flex sm:inline-flex rounded-lg p-1 bg-slate-900 border border-slate-700/80 justify-between" id="difficulty-filters">
+                    <button type="button" data-diff="All" class="filter-btn tab-active flex-1 sm:flex-initial px-2.5 sm:px-3 py-1.5 text-xs font-semibold rounded-md transition-all text-center">All</button>
+                    <button type="button" data-diff="Easy" class="filter-btn text-slate-400 hover:text-lc-easy flex-1 sm:flex-initial px-2.5 sm:px-3 py-1.5 text-xs font-semibold rounded-md transition-all text-center">Easy</button>
+                    <button type="button" data-diff="Medium" class="filter-btn text-slate-400 hover:text-lc-medium flex-1 sm:flex-initial px-2.5 sm:px-3 py-1.5 text-xs font-semibold rounded-md transition-all text-center">Med</button>
+                    <button type="button" data-diff="Hard" class="filter-btn text-slate-400 hover:text-lc-hard flex-1 sm:flex-initial px-2.5 sm:px-3 py-1.5 text-xs font-semibold rounded-md transition-all text-center">Hard</button>
+                </div>
+
+                <div class="grid grid-cols-2 sm:flex items-center gap-2">
+                    <!-- Category Selector Dropdown -->
+                    <select id="category-select" class="w-full sm:w-auto px-3 py-2 text-xs font-medium border border-slate-700/80 rounded-lg bg-slate-900 text-slate-300 focus:outline-none focus:ring-1 focus:ring-amber-400 sm:max-w-[190px] truncate">
+                        <option value="All">All Categories (10)</option>
+                    </select>
+
+                    <!-- Sorting Dropdown -->
+                    <select id="sort-select" class="w-full sm:w-auto px-3 py-2 text-xs font-medium border border-slate-700/80 rounded-lg bg-slate-900 text-slate-300 focus:outline-none focus:ring-1 focus:ring-amber-400">
+                        <option value="id-asc"># Number (Asc)</option>
+                        <option value="id-desc"># Number (Desc)</option>
+                        <option value="diff-asc">Difficulty &uarr;</option>
+                        <option value="diff-desc">Difficulty &darr;</option>
+                        <option value="title-asc">Title (A &rarr; Z)</option>
+                        <option value="status-asc">Status (Solved first)</option>
+                        <option value="category-asc">Category (A &rarr; Z)</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Problems List / Table View -->
+        <div class="bg-lc-card rounded-xl border border-slate-800 shadow-xl overflow-hidden">
+            <!-- Table Header Bar -->
+            <div class="px-4 sm:px-5 py-3 sm:py-3.5 bg-slate-900/90 border-b border-slate-800 flex items-center justify-between text-xs text-slate-400">
+                <span id="results-count" class="font-semibold text-slate-300">Loading Blind 75 problems...</span>
+                <span id="results-hint" class="font-mono text-slate-500 text-[11px] hidden sm:inline">Click solved items to view Java solution • Click unsolved to solve on LeetCode</span>
+            </div>
+
+            <!-- Responsive Table -->
+            <div class="w-full overflow-x-auto">
+                <table class="w-full text-left border-collapse" id="problems-table">
+                    <thead>
+                        <tr class="border-b border-slate-800 bg-slate-900/50 text-[11px] font-bold uppercase tracking-wider text-slate-400 select-none">
+                            <th class="py-3 px-2.5 sm:px-4 w-12 sm:w-20 text-center cursor-pointer hover:text-white transition-colors" id="th-id">#</th>
+                            <th class="py-3 px-2 sm:px-4 cursor-pointer hover:text-white transition-colors" id="th-title">Problem Title</th>
+                            <th class="py-3 px-2 sm:px-4 w-20 sm:w-28 text-center sm:text-left cursor-pointer hover:text-white transition-colors" id="th-diff">Difficulty</th>
+                            <th class="py-3 px-4 hidden md:table-cell cursor-pointer hover:text-white transition-colors" id="th-category">Blind 75 Category</th>
+                            <th class="py-3 px-3 w-28 text-center cursor-pointer hover:text-white transition-colors" id="th-status">Status</th>
+                            <th class="py-3 px-4 w-32 text-right hidden sm:table-cell">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="problems-tbody" class="divide-y divide-slate-800/60 text-sm">
+                        <!-- Populated via JS -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Empty State -->
+            <div id="empty-state" class="hidden text-center py-16 px-4">
+                <div class="w-12 h-12 rounded-full bg-slate-800/80 border border-slate-700 flex items-center justify-center mx-auto mb-3 text-slate-400">
+                    <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                </div>
+                <h3 class="text-sm font-semibold text-white">No matching Blind 75 problems found</h3>
+                <p class="text-xs text-slate-400 mt-1 max-w-sm mx-auto">Try clearing your search query or switching your status/difficulty filters.</p>
+                <div class="mt-4">
+                    <button type="button" id="clear-filters-btn" class="inline-flex items-center px-3.5 py-1.5 border border-slate-700 shadow-sm text-xs font-semibold rounded-lg text-white bg-slate-800 hover:bg-slate-700 transition-colors">
+                        Reset Filters
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="mt-auto border-t border-slate-800/80 py-6 text-center text-xs text-slate-500 px-4">
+        <p>Blind 75 Curated LeetCode Tracker &bull; Auto-synced with <a href="https://github.com/rohitkr7/leetcode-problem-solving" target="_blank" class="text-slate-400 hover:text-amber-400 underline decoration-slate-700">rohitkr7/leetcode-problem-solving</a></p>
+    </footer>
+
+    <!-- Code Viewer Modal / Drawer -->
+    <div id="code-modal" class="fixed inset-0 z-50 hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+        <!-- Backdrop -->
+        <div class="fixed inset-0 bg-black/80 backdrop-blur-sm transition-opacity" id="modal-backdrop"></div>
+      
+        <div class="fixed inset-0 z-10 overflow-y-auto">
+            <div class="flex min-h-full items-center justify-center p-2 sm:p-6 text-center">
+                <!-- Modal Panel -->
+                <div class="relative transform overflow-hidden rounded-2xl bg-lc-card text-left shadow-2xl transition-all w-full max-w-4xl border border-slate-700/80 flex flex-col max-h-[92vh] sm:max-h-[90vh]" id="modal-panel">
+                    
+                    <!-- Header -->
+                    <div class="bg-slate-900 px-4 py-3 sm:px-5 sm:py-4 flex items-center justify-between border-b border-slate-800 gap-2 sm:gap-4 shrink-0">
+                        <div class="flex items-center gap-2 sm:gap-3 min-w-0">
+                            <span id="modal-id" class="text-slate-400 font-mono text-xs sm:text-sm font-semibold bg-slate-800 px-2 py-0.5 rounded border border-slate-700 shrink-0"></span>
+                            <h3 class="text-sm sm:text-lg font-bold text-white tracking-tight truncate" id="modal-title">Problem Title</h3>
+                            <span id="modal-difficulty" class="shrink-0"></span>
+                        </div>
+                        <button type="button" id="modal-close-btn" class="p-1.5 rounded-lg bg-slate-800 text-slate-400 hover:text-white hover:bg-slate-700 transition-colors shrink-0" title="Close (Esc)">
+                            <svg class="w-5 h-5 shrink-0" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+                    </div>
+                    
+                    <!-- Modal Scrollable Body -->
+                    <div class="p-3.5 sm:p-6 text-slate-300 overflow-y-auto space-y-4 sm:space-y-5 flex-1 min-h-0">
+                        
+                        <!-- Problem Statement / Description Collapsible -->
+                        <div id="modal-readme-section" class="bg-slate-900/60 rounded-xl p-3.5 sm:p-4 border border-slate-800/80">
+                            <div class="flex justify-between items-center mb-2">
+                                <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
+                                    <svg class="w-4 h-4 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+                                    Problem Statement
+                                </h4>
+                            </div>
+                            <div id="modal-description" class="problem-description text-xs sm:text-sm text-slate-300 space-y-2 leading-relaxed">
+                                <div class="animate-pulse py-2 text-slate-500 text-xs font-mono">Loading problem statement from repository...</div>
+                            </div>
+                        </div>
+
+                        <!-- Java Code Section -->
+                        <div class="rounded-xl border border-slate-800 overflow-hidden shadow-inner">
+                            <div class="flex justify-between items-center bg-slate-900/90 px-3.5 py-2 sm:px-4 sm:py-2.5 border-b border-slate-800">
+                                <div class="flex items-center gap-1.5 sm:gap-2">
+                                    <span class="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-red-500/80 inline-block"></span>
+                                    <span class="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-yellow-500/80 inline-block"></span>
+                                    <span class="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-green-500/80 inline-block"></span>
+                                    <span class="text-xs text-slate-400 font-mono ml-1 sm:ml-2 truncate max-w-[110px] sm:max-w-none" id="modal-file-name">Solution.java</span>
+                                </div>
+                                <div class="flex items-center gap-1.5 sm:gap-2 shrink-0">
+                                    <button id="wrap-code-btn" type="button" class="px-2.5 py-1 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition-all flex items-center gap-1.5 text-xs font-medium border border-slate-700 shrink-0" title="Toggle Word Wrap">
+                                        <svg class="w-3.5 h-3.5 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <line x1="3" y1="6" x2="21" y2="6"></line>
+                                            <path d="M3 12h15a3 3 0 1 1 0 6h-4"></path>
+                                            <polyline points="16 16 14 18 16 20"></polyline>
+                                            <line x1="3" y1="18" x2="10" y2="18"></line>
+                                        </svg>
+                                        <span id="wrap-text" class="font-mono text-[11px]">Wrap</span>
+                                    </button>
+                                    <button id="copy-code-btn" class="px-2.5 py-1 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition-colors flex items-center gap-1.5 text-xs font-medium border border-slate-700 shrink-0">
+                                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                                        <span id="copy-text" class="font-mono text-[11px]">Copy Code</span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="relative bg-[#0d1322] overflow-hidden">
+                                <pre id="modal-pre" class="line-numbers text-xs overflow-x-auto"><code class="language-java" id="modal-code">// Code loading...</code></pre>
+                            </div>
+                        </div>
+
+                    </div>
+                    
+                    <!-- Footer Links & Tags -->
+                    <div class="bg-slate-900 px-4 py-3 sm:px-6 sm:py-3.5 border-t border-slate-800 flex flex-wrap items-center justify-between gap-3 shrink-0">
+                        <div class="flex items-center gap-1.5 flex-wrap" id="modal-tags">
+                            <!-- Populated with tags -->
+                        </div>
+                        <div class="flex items-center gap-2 sm:gap-3 text-xs font-semibold ml-auto">
+                            <a id="modal-leetcode-link" href="#" target="_blank" class="text-lc-gold hover:text-amber-400 flex items-center gap-1 hover:underline">
+                                <span>View on LeetCode</span>
+                                <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
+                            </a>
+                            <span class="text-slate-600">&bull;</span>
+                            <a id="modal-github-link" href="#" target="_blank" class="text-slate-400 hover:text-white flex items-center gap-1 hover:underline">
+                                <span>GitHub Folder</span>
+                                <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-java.min.js"></script>
+
+    <script>
+    // Blind 75 Dedicated Page Logic
+    (function() {
+        let blind75 = [];
+        let solvedProblems = [];
+        let filteredItems = [];
+
+        let currentFilter = {
+            search: '',
+            status: 'All',       // 'All' | 'Solved' | 'Unsolved'
+            difficulty: 'All',   // 'All' | 'Easy' | 'Medium' | 'Hard'
+            category: 'All',
+            sort: 'id-asc'
+        };
+
+        const BLIND75_CATEGORIES = [
+            'Array', 'Binary', 'Dynamic Programming', 'Graph', 
+            'Interval', 'Linked List', 'Matrix', 'String', 'Tree', 'Heap'
+        ];
+
+        const GITHUB_REPO = 'rohitkr7/leetcode-problem-solving';
+
+        // DOM Elements
+        const statsCards = document.getElementById('stats-cards');
+        const statsTopicWidget = document.getElementById('stats-topic-widget');
+        const problemsTbody = document.getElementById('problems-tbody');
+        const resultsCount = document.getElementById('results-count');
+        const searchInput = document.getElementById('search-input');
+        const statusFilters = document.getElementById('status-filters');
+        const difficultyFilters = document.getElementById('difficulty-filters');
+        const categorySelect = document.getElementById('category-select');
+        const sortSelect = document.getElementById('sort-select');
+        const emptyState = document.getElementById('empty-state');
+        const clearFiltersBtn = document.getElementById('clear-filters-btn');
+        const syncBtn = document.getElementById('sync-btn');
+        const syncText = document.getElementById('sync-text');
+        const syncIcon = document.getElementById('sync-icon');
+
+        const thId = document.getElementById('th-id');
+        const thTitle = document.getElementById('th-title');
+        const thDiff = document.getElementById('th-diff');
+        const thCategory = document.getElementById('th-category');
+        const thStatus = document.getElementById('th-status');
+
+        // Modal
+        const modal = document.getElementById('code-modal');
+        const modalBackdrop = document.getElementById('modal-backdrop');
+        const modalCloseBtn = document.getElementById('modal-close-btn');
+        const modalId = document.getElementById('modal-id');
+        const modalTitle = document.getElementById('modal-title');
+        const modalDiff = document.getElementById('modal-difficulty');
+        const modalDesc = document.getElementById('modal-description');
+        const modalCode = document.getElementById('modal-code');
+        const modalFileName = document.getElementById('modal-file-name');
+        const modalTags = document.getElementById('modal-tags');
+        const modalLeetcodeLink = document.getElementById('modal-leetcode-link');
+        const modalGithubLink = document.getElementById('modal-github-link');
+        const modalPre = document.getElementById('modal-pre');
+        const wrapBtn = document.getElementById('wrap-code-btn');
+        const wrapText = document.getElementById('wrap-text');
+        const copyBtn = document.getElementById('copy-code-btn');
+        const copyText = document.getElementById('copy-text');
+        let isWordWrap = localStorage.getItem('lc_viewer_word_wrap') === 'true';
+        let currentRawCode = '';
+
+        function renderCodeContent(rawCode) {
+            currentRawCode = rawCode || '';
+            try {
+                const highlighted = Prism.highlight(currentRawCode, Prism.languages.java || Prism.languages.clike, 'java');
+                const lines = highlighted.split('\n');
+                let openTags = [];
+                const formattedLines = lines.map((line, idx) => {
+                    let linePrefix = openTags.join('');
+                    const tagRegex = /<\/?([a-z0-9-]+)(?:\s+[^>]*)?>/gi;
+                    let match;
+                    while ((match = tagRegex.exec(line)) !== null) {
+                        if (match[0].startsWith('</')) {
+                            openTags.pop();
+                        } else if (!match[0].endsWith('/>')) {
+                            openTags.push(match[0]);
+                        }
+                    }
+                    let lineSuffix = openTags.map(t => `</${t.match(/<([a-z0-9-]+)/i)[1]}>`).reverse().join('');
+                    return `<div class="code-line"><span class="code-line-num">${idx + 1}</span><span class="code-line-content">${linePrefix}${line || ' '}${lineSuffix}</span></div>`;
+                });
+                modalCode.innerHTML = formattedLines.join('');
+            } catch (e) {
+                modalCode.textContent = currentRawCode;
+            }
+        }
+
+        function updateWordWrapUI() {
+            if (modalPre) {
+                modalPre.classList.toggle('code-wrapped', isWordWrap);
+            }
+            if (wrapBtn) {
+                if (isWordWrap) {
+                    wrapBtn.classList.add('border-amber-500/70', 'text-amber-400', 'bg-amber-500/15');
+                    wrapBtn.classList.remove('text-slate-300', 'bg-slate-800');
+                    if (wrapText) wrapText.textContent = 'Wrapped';
+                } else {
+                    wrapBtn.classList.remove('border-amber-500/70', 'text-amber-400', 'bg-amber-500/15');
+                    wrapBtn.classList.add('text-slate-300', 'bg-slate-800');
+                    if (wrapText) wrapText.textContent = 'Wrap';
+                }
+            }
+        }
+
+        async function init() {
+            setupEventListeners();
+            updateWordWrapUI();
+
+            // 1. Fetch blind75.json and problems.json
+            try {
+                const [b75Res, pRes] = await Promise.all([
+                    fetch('blind75.json'),
+                    fetch('problems.json')
+                ]);
+
+                if (b75Res.ok) {
+                    blind75 = await b75Res.json();
+                }
+                if (pRes.ok) {
+                    solvedProblems = await pRes.json();
+                }
+            } catch (e) {
+                console.warn('Local fetch fallback:', e);
+            }
+
+            processData();
+            syncWithGitHub(false);
+        }
+
+        function processData() {
+            const solvedIdMap = new Map(solvedProblems.map(p => [p.id, p]));
+
+            blind75 = blind75.map(item => {
+                const solvedItem = solvedIdMap.get(item.id);
+                const isSolved = Boolean(solvedItem);
+                return {
+                    ...item,
+                    isSolved,
+                    folder: isSolved ? solvedItem.folder : (item.folder || undefined),
+                    javaFile: isSolved ? solvedItem.javaFile : (item.javaFile || undefined),
+                    readmeFile: isSolved ? solvedItem.readmeFile : (item.readmeFile || undefined),
+                    topics: isSolved && solvedItem.topics ? solvedItem.topics : [item.category]
+                };
+            });
+
+            populateCategoryDropdown();
+            applyFilters();
+        }
+
+        async function syncWithGitHub(manualTrigger = false) {
+            if (manualTrigger) {
+                syncIcon.classList.add('animate-spin');
+                syncText.textContent = 'Syncing...';
+            }
+
+            try {
+                const apiUrl = `https://api.github.com/repos/${GITHUB_REPO}/git/trees/main?recursive=1`;
+                const response = await fetch(apiUrl);
+                if (!response.ok) throw new Error(`GitHub API error: ${response.status}`);
+                const data = await response.json();
+                if (!data || !data.tree) throw new Error('Invalid tree');
+
+                const folderMap = new Map();
+                data.tree.forEach(item => {
+                    const parts = item.path.split('/');
+                    if (parts.length > 1 && /^\d{4}-/.test(parts[0])) {
+                        const folder = parts[0];
+                        if (!folderMap.has(folder)) {
+                            folderMap.set(folder, { folder, javaFile: null, readmeFile: null });
+                        }
+                        if (item.path.endsWith('.java')) folderMap.get(folder).javaFile = item.path;
+                        if (item.path.endsWith('README.md')) folderMap.get(folder).readmeFile = item.path;
+                    }
+                });
+
+                const solvedList = [];
+                for (const [folder, info] of folderMap.entries()) {
+                    const match = folder.match(/^(\d{4})-(.+)$/);
+                    if (!match) continue;
+                    const id = parseInt(match[1], 10);
+                    const slug = match[2];
+                    const title = slug.split('-').map(s => s.charAt(0).toUpperCase() + s.slice(1)).join(' ');
+                    solvedList.push({
+                        id,
+                        title,
+                        slug,
+                        folder,
+                        leetcodeUrl: `https://leetcode.com/problems/${slug}/`,
+                        javaFile: info.javaFile,
+                        readmeFile: info.readmeFile
+                    });
+                }
+
+                solvedProblems = solvedList;
+                processData();
+
+                const solvedCount = blind75.filter(p => p.isSolved).length;
+                if (syncText) syncText.textContent = `Live Synced (${solvedCount}/75)`;
+            } catch (err) {
+                const solvedCount = blind75.filter(p => p.isSolved).length;
+                if (syncText) syncText.textContent = `Offline (${solvedCount}/75)`;
+            } finally {
+                if (manualTrigger) {
+                    setTimeout(() => syncIcon.classList.remove('animate-spin'), 500);
+                }
+            }
+        }
+
+        function populateCategoryDropdown() {
+            const currentSelected = categorySelect.value;
+            categorySelect.innerHTML = `<option value="All">All Categories (${BLIND75_CATEGORIES.length})</option>`;
+            BLIND75_CATEGORIES.forEach(cat => {
+                const totalInCat = blind75.filter(p => p.category === cat).length;
+                const solvedInCat = blind75.filter(p => p.category === cat && p.isSolved).length;
+                const opt = document.createElement('option');
+                opt.value = cat;
+                opt.textContent = `${cat} (${solvedInCat}/${totalInCat})`;
+                categorySelect.appendChild(opt);
+            });
+            if (BLIND75_CATEGORIES.includes(currentSelected)) {
+                categorySelect.value = currentSelected;
+            }
+        }
+
+        function applyFilters() {
+            const q = currentFilter.search.toLowerCase().trim();
+            const status = currentFilter.status;
+            const diff = currentFilter.difficulty;
+            const cat = currentFilter.category;
+
+            filteredItems = blind75.filter(p => {
+                const searchMatch = !q ||
+                    p.title.toLowerCase().includes(q) ||
+                    p.id.toString().includes(q) ||
+                    p.slug.toLowerCase().includes(q) ||
+                    p.category.toLowerCase().includes(q);
+
+                const statusMatch = status === 'All' ||
+                    (status === 'Solved' && p.isSolved) ||
+                    (status === 'Unsolved' && !p.isSolved);
+
+                const diffMatch = diff === 'All' || p.difficulty === diff;
+                const catMatch = cat === 'All' || p.category === cat;
+
+                return searchMatch && statusMatch && diffMatch && catMatch;
+            });
+
+            // Sorting
+            const diffMap = { 'Easy': 1, 'Medium': 2, 'Hard': 3 };
+            filteredItems.sort((a, b) => {
+                switch (currentFilter.sort) {
+                    case 'id-asc': return a.id - b.id;
+                    case 'id-desc': return b.id - a.id;
+                    case 'diff-asc': return (diffMap[a.difficulty] || 2) - (diffMap[b.difficulty] || 2);
+                    case 'diff-desc': return (diffMap[b.difficulty] || 2) - (diffMap[a.difficulty] || 2);
+                    case 'title-asc': return a.title.localeCompare(b.title);
+                    case 'category-asc': return a.category.localeCompare(b.category);
+                    case 'status-asc': {
+                        if (a.isSolved === b.isSolved) return a.id - b.id;
+                        return a.isSolved ? -1 : 1;
+                    }
+                    default: return a.id - b.id;
+                }
+            });
+
+            renderStats();
+            renderTable();
+        }
+
+        function renderStats() {
+            const total = blind75.length || 75;
+            const solved = blind75.filter(p => p.isSolved).length;
+            const solvedPct = total > 0 ? Math.round((solved / total) * 100) : 0;
+
+            const easyTotal = blind75.filter(p => p.difficulty === 'Easy').length;
+            const easySolved = blind75.filter(p => p.difficulty === 'Easy' && p.isSolved).length;
+            const easyPct = easyTotal > 0 ? Math.round((easySolved / easyTotal) * 100) : 0;
+
+            const medTotal = blind75.filter(p => p.difficulty === 'Medium').length;
+            const medSolved = blind75.filter(p => p.difficulty === 'Medium' && p.isSolved).length;
+            const medPct = medTotal > 0 ? Math.round((medSolved / medTotal) * 100) : 0;
+
+            const hardTotal = blind75.filter(p => p.difficulty === 'Hard').length;
+            const hardSolved = blind75.filter(p => p.difficulty === 'Hard' && p.isSolved).length;
+            const hardPct = hardTotal > 0 ? Math.round((hardSolved / hardTotal) * 100) : 0;
+
+            if (statsCards) {
+                statsCards.innerHTML = `
+                    <!-- Overall Blind 75 Completion -->
+                    <div class="stat-card cursor-pointer bg-lc-card rounded-xl p-3.5 sm:p-4 border border-amber-500/50 shadow-lg flex flex-col justify-between hover:border-amber-400 hover:bg-slate-800/40 transition-all ${currentFilter.status === 'All' && currentFilter.difficulty === 'All' ? 'ring-1 ring-amber-500' : ''}" data-status="All" title="View all Blind 75 problems">
+                        <div class="flex items-center justify-between mb-1">
+                            <span class="text-[11px] font-bold uppercase tracking-wider text-amber-300">Completion</span>
+                            <span class="text-sm">🎯</span>
+                        </div>
+                        <div class="my-1 flex items-baseline justify-between">
+                            <span class="text-2xl sm:text-3xl font-extrabold text-white font-mono tracking-tight">${solved}<span class="text-xs sm:text-sm text-slate-400 font-normal">/${total}</span></span>
+                            <span class="text-[11px] font-mono text-amber-300 font-bold px-2 py-0.5 rounded bg-amber-500/15 border border-amber-500/30">${solvedPct}%</span>
+                        </div>
+                        <div class="w-full bg-slate-800 rounded-full h-2 mt-2 overflow-hidden border border-slate-700/60">
+                            <div class="bg-gradient-to-r from-amber-500 to-amber-300 h-2 rounded-full transition-all duration-700" style="width: ${solvedPct}%"></div>
+                        </div>
+                    </div>
+
+                    <!-- Easy -->
+                    <div class="stat-card cursor-pointer bg-lc-card rounded-xl p-3.5 sm:p-4 border border-slate-800/90 shadow-lg flex flex-col justify-between hover:border-emerald-500/40 hover:bg-slate-800/40 transition-all ${currentFilter.difficulty === 'Easy' ? 'ring-1 ring-emerald-500' : ''}" data-diff="Easy" title="Filter Easy Blind 75">
+                        <div class="mb-1 flex items-center justify-between">
+                            <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400">Easy</span>
+                            <span class="text-[10px] font-mono text-slate-400">${easySolved}/${easyTotal}</span>
+                        </div>
+                        <div class="my-1 flex items-center justify-between gap-1">
+                            <span class="text-2xl sm:text-3xl font-extrabold text-lc-easy font-mono tracking-tight">${easySolved}</span>
+                            <span class="text-[11px] font-semibold px-2 py-0.5 rounded-md bg-emerald-500/10 text-lc-easy border border-emerald-500/25 font-mono">${easyPct}%</span>
+                        </div>
+                        <div class="w-full bg-slate-800 rounded-full h-1.5 mt-2 overflow-hidden">
+                            <div class="bg-lc-easy h-1.5 rounded-full transition-all duration-500" style="width: ${easyPct}%"></div>
+                        </div>
+                    </div>
+
+                    <!-- Medium -->
+                    <div class="stat-card cursor-pointer bg-lc-card rounded-xl p-3.5 sm:p-4 border border-slate-800/90 shadow-lg flex flex-col justify-between hover:border-amber-500/40 hover:bg-slate-800/40 transition-all ${currentFilter.difficulty === 'Medium' ? 'ring-1 ring-amber-500' : ''}" data-diff="Medium" title="Filter Medium Blind 75">
+                        <div class="mb-1 flex items-center justify-between">
+                            <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400">Medium</span>
+                            <span class="text-[10px] font-mono text-slate-400">${medSolved}/${medTotal}</span>
+                        </div>
+                        <div class="my-1 flex items-center justify-between gap-1">
+                            <span class="text-2xl sm:text-3xl font-extrabold text-lc-medium font-mono tracking-tight">${medSolved}</span>
+                            <span class="text-[11px] font-semibold px-2 py-0.5 rounded-md bg-amber-500/10 text-lc-medium border border-amber-500/25 font-mono">${medPct}%</span>
+                        </div>
+                        <div class="w-full bg-slate-800 rounded-full h-1.5 mt-2 overflow-hidden">
+                            <div class="bg-lc-medium h-1.5 rounded-full transition-all duration-500" style="width: ${medPct}%"></div>
+                        </div>
+                    </div>
+
+                    <!-- Hard -->
+                    <div class="stat-card cursor-pointer bg-lc-card rounded-xl p-3.5 sm:p-4 border border-slate-800/90 shadow-lg flex flex-col justify-between hover:border-rose-500/40 hover:bg-slate-800/40 transition-all ${currentFilter.difficulty === 'Hard' ? 'ring-1 ring-rose-500' : ''}" data-diff="Hard" title="Filter Hard Blind 75">
+                        <div class="mb-1 flex items-center justify-between">
+                            <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400">Hard</span>
+                            <span class="text-[10px] font-mono text-slate-400">${hardSolved}/${hardTotal}</span>
+                        </div>
+                        <div class="my-1 flex items-center justify-between gap-1">
+                            <span class="text-2xl sm:text-3xl font-extrabold text-lc-hard font-mono tracking-tight">${hardSolved}</span>
+                            <span class="text-[11px] font-semibold px-2 py-0.5 rounded-md bg-rose-500/10 text-lc-hard border border-rose-500/25 font-mono">${hardPct}%</span>
+                        </div>
+                        <div class="w-full bg-slate-800 rounded-full h-1.5 mt-2 overflow-hidden">
+                            <div class="bg-lc-hard h-1.5 rounded-full transition-all duration-500" style="width: ${hardPct}%"></div>
+                        </div>
+                    </div>
+                `;
+
+                statsCards.querySelectorAll('.stat-card').forEach(card => {
+                    card.addEventListener('click', () => {
+                        const diff = card.dataset.diff;
+                        if (diff) {
+                            const tabBtn = difficultyFilters.querySelector(`button[data-diff="${diff}"]`);
+                            if (tabBtn) tabBtn.click();
+                        } else if (card.dataset.status) {
+                            const statusBtn = statusFilters.querySelector(`button[data-status="All"]`);
+                            if (statusBtn) statusBtn.click();
+                        }
+                    });
+                });
+            }
+
+            if (statsTopicWidget) {
+                statsTopicWidget.innerHTML = `
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="text-xs font-bold uppercase tracking-wider text-slate-300">Category Progress (10 Core Topics)</span>
+                        <span class="text-[11px] text-slate-500 font-mono">Click to Filter</span>
+                    </div>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-1.5 max-h-28 overflow-y-auto pr-1">
+                        ${BLIND75_CATEGORIES.map(cat => {
+                            const totalCat = blind75.filter(p => p.category === cat).length;
+                            const solvedCat = blind75.filter(p => p.category === cat && p.isSolved).length;
+                            const isDone = totalCat > 0 && solvedCat === totalCat;
+                            const hasProgress = solvedCat > 0;
+                            const isSelected = currentFilter.category === cat;
+
+                            let badgeColor = isDone ? 'text-emerald-400 bg-emerald-500/10 border-emerald-500/30' :
+                                             hasProgress ? 'text-amber-300 bg-amber-500/10 border-amber-500/30' :
+                                             'text-slate-400 bg-slate-900 border-slate-800';
+
+                            return `
+                                <button type="button" data-category="${cat}" class="blind75-cat-chip flex items-center justify-between px-2 py-1 rounded-md text-[11px] font-semibold bg-slate-800/80 hover:bg-slate-700 transition-all border ${isSelected ? 'border-amber-400 ring-1 ring-amber-400/50 text-white' : 'border-slate-700/60 text-slate-300'}">
+                                    <span class="truncate">${cat}</span>
+                                    <span class="text-[10px] px-1.5 py-0.2 rounded border font-mono font-bold ${badgeColor}">${solvedCat}/${totalCat}</span>
+                                </button>
+                            `;
+                        }).join('')}
+                    </div>
+                `;
+
+                statsTopicWidget.querySelectorAll('.blind75-cat-chip').forEach(chip => {
+                    chip.addEventListener('click', () => {
+                        const cat = chip.dataset.category;
+                        categorySelect.value = currentFilter.category === cat ? 'All' : cat;
+                        currentFilter.category = categorySelect.value;
+                        applyFilters();
+                    });
+                });
+            }
+        }
+
+        function getDifficultyBadge(diff) {
+            if (diff === 'Easy') return '<span class="inline-flex items-center px-2 sm:px-2.5 py-0.5 rounded-full text-[11px] sm:text-xs font-semibold bg-emerald-500/10 text-lc-easy border border-emerald-500/30">Easy</span>';
+            if (diff === 'Medium') return '<span class="inline-flex items-center px-2 sm:px-2.5 py-0.5 rounded-full text-[11px] sm:text-xs font-semibold bg-amber-500/10 text-lc-medium border border-amber-500/30">Medium</span>';
+            return '<span class="inline-flex items-center px-2 sm:px-2.5 py-0.5 rounded-full text-[11px] sm:text-xs font-semibold bg-rose-500/10 text-lc-hard border border-rose-500/30">Hard</span>';
+        }
+
+        function renderTable() {
+            const totalItemsCount = blind75.length;
+
+            if (filteredItems.length === 0) {
+                problemsTbody.innerHTML = '';
+                emptyState.classList.remove('hidden');
+                resultsCount.textContent = `Showing 0 of ${totalItemsCount} Blind 75 problems`;
+                return;
+            }
+
+            emptyState.classList.add('hidden');
+            resultsCount.textContent = `Showing ${filteredItems.length} of ${totalItemsCount} Blind 75 problems`;
+
+            problemsTbody.innerHTML = filteredItems.map(p => {
+                const isSolved = p.isSolved;
+                const statusBadge = isSolved
+                    ? `<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-500/15 text-emerald-300 border border-emerald-500/30"><svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg> Solved</span>`
+                    : `<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-slate-800 text-slate-400 border border-slate-700"><span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span> Unsolved</span>`;
+
+                const actionButton = isSolved
+                    ? `<button type="button" class="view-btn px-3 py-1.5 rounded-lg text-xs font-semibold text-white bg-slate-800 hover:bg-slate-700 border border-slate-700 group-hover:border-slate-600 transition-all inline-flex items-center gap-1.5">
+                            <span>Solution</span>
+                            <svg class="w-3 h-3 text-slate-400 group-hover:text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+                       </button>`
+                    : `<a href="${p.leetcodeUrl}" target="_blank" onclick="event.stopPropagation()" class="px-3 py-1.5 rounded-lg text-xs font-semibold text-amber-300 bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/30 transition-all inline-flex items-center gap-1.5">
+                            <span>Solve</span>
+                            <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
+                       </a>`;
+
+                return `
+                    <tr class="problem-row cursor-pointer transition-colors group ${isSolved ? 'hover:bg-slate-800/60' : 'hover:bg-slate-800/30 opacity-90'}" data-id="${p.id}" data-solved="${isSolved}">
+                        <td class="py-3 px-2.5 sm:px-4 text-center font-mono text-xs font-semibold text-slate-400 group-hover:text-white">
+                            #${p.id}
+                        </td>
+                        <td class="py-3 px-2 sm:px-4 min-w-0">
+                            <div class="flex items-center gap-1.5 sm:gap-2">
+                                <span class="font-semibold text-slate-100 group-hover:text-amber-300 transition-colors text-xs sm:text-sm break-words">${p.title}</span>
+                                <a href="${p.leetcodeUrl}" target="_blank" onclick="event.stopPropagation()" title="Open on LeetCode" class="shrink-0 text-slate-500 hover:text-lc-gold transition-colors opacity-70 sm:opacity-0 sm:group-hover:opacity-100">
+                                    <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
+                                </a>
+                            </div>
+                        </td>
+                        <td class="py-3 px-2 sm:px-4 text-center sm:text-left whitespace-nowrap">
+                            ${getDifficultyBadge(p.difficulty)}
+                        </td>
+                        <td class="py-3.5 px-4 hidden md:table-cell">
+                            <span class="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-semibold bg-slate-800/90 text-slate-300 border border-slate-700/60">${p.category}</span>
+                        </td>
+                        <td class="py-3 px-3 text-center whitespace-nowrap">
+                            ${statusBadge}
+                        </td>
+                        <td class="py-3.5 px-4 text-right whitespace-nowrap hidden sm:table-cell">
+                            ${actionButton}
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+
+            document.querySelectorAll('.problem-row').forEach(row => {
+                row.addEventListener('click', () => {
+                    const id = parseInt(row.dataset.id, 10);
+                    const isSolved = row.dataset.solved === 'true';
+                    if (isSolved) {
+                        openModal(id);
+                    } else {
+                        const item = blind75.find(p => p.id === id);
+                        if (item && item.leetcodeUrl) {
+                            window.open(item.leetcodeUrl, '_blank');
+                        }
+                    }
+                });
+            });
+        }
+
+        async function openModal(id) {
+            const item = blind75.find(p => p.id === id);
+            if (!item) return;
+
+            const folder = item.folder || `${String(item.id).padStart(4, '0')}-${item.slug}`;
+            const javaFile = item.javaFile || `${folder}/${folder}.java`;
+            const readmeFile = item.readmeFile || `${folder}/README.md`;
+
+            modalId.textContent = `#${item.id}`;
+            modalTitle.textContent = item.title;
+            modalDiff.innerHTML = getDifficultyBadge(item.difficulty);
+            modalFileName.textContent = javaFile.split('/').pop();
+            modalLeetcodeLink.href = item.leetcodeUrl;
+            modalGithubLink.href = `https://github.com/${GITHUB_REPO}/tree/main/${folder}`;
+
+            modalTags.innerHTML = `<span class="px-2 py-0.5 rounded bg-slate-800 border border-slate-700 text-[11px] text-amber-300 font-semibold">🎯 Blind 75</span><span class="px-2 py-0.5 rounded bg-slate-800 border border-slate-700 text-[11px] text-slate-300 font-medium">${item.category}</span>`;
+
+            renderCodeContent('// Fetching solution from GitHub repository...');
+            modalDesc.innerHTML = `<div class="animate-pulse text-xs text-slate-400 py-2">Loading problem statement from repository...</div>`;
+            copyText.textContent = 'Copy Code';
+
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+            updateWordWrapUI();
+
+            const rawCodeUrl = `https://raw.githubusercontent.com/${GITHUB_REPO}/main/${javaFile}`;
+            try {
+                const codeRes = await fetch(rawCodeUrl);
+                if (codeRes.ok) {
+                    const code = await codeRes.text();
+                    renderCodeContent(code);
+                } else {
+                    renderCodeContent(`// Solution file available on GitHub:\n// https://github.com/${GITHUB_REPO}/tree/main/${folder}`);
+                }
+            } catch (e) {
+                renderCodeContent(`// View on GitHub: https://github.com/${GITHUB_REPO}/tree/main/${folder}`);
+            }
+
+            const rawReadmeUrl = `https://raw.githubusercontent.com/${GITHUB_REPO}/main/${readmeFile}`;
+            try {
+                const readmeRes = await fetch(rawReadmeUrl);
+                if (readmeRes.ok) {
+                    const html = await readmeRes.text();
+                    const cleanHtml = html
+                        .replace(/<h2>.*?<\/h2>/i, '')
+                        .replace(/<h3>.*?<\/h3>/i, '')
+                        .replace(/<hr\s*\/?>/gi, '');
+                    modalDesc.innerHTML = cleanHtml || '<p class="text-xs text-slate-400">No description provided in README.</p>';
+                } else {
+                    modalDesc.innerHTML = `<p class="text-xs text-slate-400">Problem statement available directly on <a href="${item.leetcodeUrl}" target="_blank" class="text-lc-gold underline">LeetCode</a>.</p>`;
+                }
+            } catch (e) {
+                modalDesc.innerHTML = `<p class="text-xs text-slate-400">Problem statement available on <a href="${item.leetcodeUrl}" target="_blank" class="text-lc-gold underline">LeetCode</a>.</p>`;
+            }
+        }
+
+        function closeModal() {
+            modal.classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+
+        function setupEventListeners() {
+            searchInput.addEventListener('input', (e) => {
+                currentFilter.search = e.target.value;
+                applyFilters();
+            });
+
+            statusFilters.addEventListener('click', (e) => {
+                const btn = e.target.closest('button');
+                if (!btn) return;
+                statusFilters.querySelectorAll('button').forEach(b => {
+                    b.classList.remove('tab-active');
+                    b.classList.add('text-slate-400');
+                });
+                btn.classList.add('tab-active');
+                btn.classList.remove('text-slate-400');
+                currentFilter.status = btn.dataset.status;
+                applyFilters();
+            });
+
+            difficultyFilters.addEventListener('click', (e) => {
+                const btn = e.target.closest('button');
+                if (!btn) return;
+                difficultyFilters.querySelectorAll('button').forEach(b => {
+                    b.classList.remove('tab-active');
+                    b.classList.add('text-slate-400');
+                });
+                btn.classList.add('tab-active');
+                btn.classList.remove('text-slate-400');
+                currentFilter.difficulty = btn.dataset.diff;
+                applyFilters();
+            });
+
+            categorySelect.addEventListener('change', (e) => {
+                currentFilter.category = e.target.value;
+                applyFilters();
+            });
+
+            sortSelect.addEventListener('change', (e) => {
+                currentFilter.sort = e.target.value;
+                applyFilters();
+            });
+
+            thId.addEventListener('click', () => {
+                currentFilter.sort = currentFilter.sort === 'id-asc' ? 'id-desc' : 'id-asc';
+                sortSelect.value = currentFilter.sort;
+                applyFilters();
+            });
+
+            thTitle.addEventListener('click', () => {
+                currentFilter.sort = currentFilter.sort === 'title-asc' ? 'id-asc' : 'title-asc';
+                sortSelect.value = currentFilter.sort;
+                applyFilters();
+            });
+
+            thDiff.addEventListener('click', () => {
+                currentFilter.sort = currentFilter.sort === 'diff-asc' ? 'diff-desc' : 'diff-asc';
+                sortSelect.value = currentFilter.sort;
+                applyFilters();
+            });
+
+            thCategory.addEventListener('click', () => {
+                currentFilter.sort = currentFilter.sort === 'category-asc' ? 'id-asc' : 'category-asc';
+                sortSelect.value = currentFilter.sort;
+                applyFilters();
+            });
+
+            thStatus.addEventListener('click', () => {
+                currentFilter.sort = currentFilter.sort === 'status-asc' ? 'id-asc' : 'status-asc';
+                sortSelect.value = currentFilter.sort;
+                applyFilters();
+            });
+
+            clearFiltersBtn.addEventListener('click', () => {
+                searchInput.value = '';
+                currentFilter.search = '';
+                const allDiffBtn = difficultyFilters.querySelector('[data-diff="All"]');
+                if (allDiffBtn) allDiffBtn.click();
+                const allStatusBtn = statusFilters.querySelector('[data-status="All"]');
+                if (allStatusBtn) allStatusBtn.click();
+                categorySelect.value = 'All';
+                currentFilter.category = 'All';
+                sortSelect.value = 'id-asc';
+                currentFilter.sort = 'id-asc';
+                applyFilters();
+            });
+
+            syncBtn.addEventListener('click', () => syncWithGitHub(true));
+
+            modalCloseBtn.addEventListener('click', closeModal);
+            modalBackdrop.addEventListener('click', closeModal);
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+                    closeModal();
+                }
+            });
+
+            copyBtn.addEventListener('click', () => {
+                const code = currentRawCode || modalCode.textContent;
+                navigator.clipboard.writeText(code).then(() => {
+                    copyText.textContent = 'Copied!';
+                    setTimeout(() => copyText.textContent = 'Copy Code', 2000);
+                }).catch(err => console.error('Copy failed:', err));
+            });
+
+            if (wrapBtn) {
+                wrapBtn.addEventListener('click', () => {
+                    isWordWrap = !isWordWrap;
+                    try { localStorage.setItem('lc_viewer_word_wrap', isWordWrap); } catch (e) {}
+                    updateWordWrapUI();
+                });
+            }
+        }
+
+        init();
+    })();
+    </script>
+</body>
+</html>
