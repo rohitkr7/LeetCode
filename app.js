@@ -686,17 +686,74 @@ function startApp() {
             applyFilters();
         });
 
+        // Mobile Hamburger Menu Toggle
+        const hamburgerBtn = document.getElementById('hamburger-btn');
+        const hamburgerIconOpen = document.getElementById('hamburger-icon-open');
+        const hamburgerIconClose = document.getElementById('hamburger-icon-close');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileSyncBtn = document.getElementById('mobile-sync-btn');
+        const mobileSyncText = document.getElementById('mobile-sync-text');
+
+        if (hamburgerBtn && mobileMenu) {
+            hamburgerBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const isOpen = !mobileMenu.classList.contains('hidden');
+                if (isOpen) {
+                    mobileMenu.classList.add('hidden');
+                    if (hamburgerIconOpen) hamburgerIconOpen.classList.remove('hidden');
+                    if (hamburgerIconClose) hamburgerIconClose.classList.add('hidden');
+                } else {
+                    mobileMenu.classList.remove('hidden');
+                    if (hamburgerIconOpen) hamburgerIconOpen.classList.add('hidden');
+                    if (hamburgerIconClose) hamburgerIconClose.classList.remove('hidden');
+                }
+            });
+
+            // Close mobile menu on outside click
+            document.addEventListener('click', (e) => {
+                if (!mobileMenu.contains(e.target) && !hamburgerBtn.contains(e.target) && !mobileMenu.classList.contains('hidden')) {
+                    mobileMenu.classList.add('hidden');
+                    if (hamburgerIconOpen) hamburgerIconOpen.classList.remove('hidden');
+                    if (hamburgerIconClose) hamburgerIconClose.classList.add('hidden');
+                }
+            });
+
+            // Close on link click
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                    if (hamburgerIconOpen) hamburgerIconOpen.classList.remove('hidden');
+                    if (hamburgerIconClose) hamburgerIconClose.classList.add('hidden');
+                });
+            });
+        }
+
+        if (mobileSyncBtn) {
+            mobileSyncBtn.addEventListener('click', () => {
+                syncWithGitHub(true);
+            });
+        }
+
         // Sync Button (Manual Refresh from GitHub)
-        syncBtn.addEventListener('click', () => {
-            syncWithGitHub(true);
-        });
+        if (syncBtn) {
+            syncBtn.addEventListener('click', () => {
+                syncWithGitHub(true);
+            });
+        }
 
         // Modal Close Events
         modalCloseBtn.addEventListener('click', closeModal);
         modalBackdrop.addEventListener('click', closeModal);
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
-                closeModal();
+            if (e.key === 'Escape') {
+                if (!modal.classList.contains('hidden')) {
+                    closeModal();
+                }
+                if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
+                    mobileMenu.classList.add('hidden');
+                    if (hamburgerIconOpen) hamburgerIconOpen.classList.remove('hidden');
+                    if (hamburgerIconClose) hamburgerIconClose.classList.add('hidden');
+                }
             }
         });
 
